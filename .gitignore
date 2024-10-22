@@ -1,0 +1,14 @@
+# Ignorer les fichiers binaires compilés
+*.exe
+*.o
+*.out
+
+# Ignorer les fichiers de configuration de l'éditeur
+.vscode/
+.idea/
+
+# Ignorer les fichiers de log
+*.log
+
+# Ignorer les fichiers temporaires
+*.tmp
