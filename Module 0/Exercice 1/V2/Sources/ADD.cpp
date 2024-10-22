@@ -13,7 +13,7 @@ std::vector<std::string> ADD::SetContactInformation() {
       std::cout << sInformationAsk[Index] << ": ";
       std::getline(std::cin, NewContact[Index]);
 
-      if (Index == 5 && NewContact[Index].find("@") == std::string::npos) {
+      while (Index == 5 && NewContact[Index].find("@") == std::string::npos) {
         std::cout << "Email error, retry: ";
         std::getline(std::cin, NewContact[Index]);
       }

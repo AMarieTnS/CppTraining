@@ -24,7 +24,8 @@ void SEARCH::DisplayContacts(const ADD &Contacts) const {
     formatString(sLastName);
     formatString(sNickname);
 
-    std::cout << sIndex + "|" + sFirstName + "|" + sLastName + "|" + sNickname << std::endl << std::endl;
+    std::cout << sIndex + "|" + sFirstName + "|" + sLastName + "|" + sNickname
+              << std::endl;
   }
 }
 
@@ -38,20 +39,19 @@ void SEARCH::DisplayOneContact(const ADD &Contact) const {
 
     for (const auto &contact : ContactList) {
       if (contact[0] == sFirstName) {
-        std::cout << "First name: " << contact[0] << std::endl;
-        std::cout << "Last name: " << contact[1] << std::endl;
-        std::cout << "Nickname: " << contact[2] << std::endl;
-        std::cout << "Login: " << contact[3] << std::endl;
-        std::cout << "Postal address: " << contact[4] << std::endl;
-        std::cout << "Email address: " << contact[5] << std::endl;
-        std::cout << "Phone number: " << contact[6] << std::endl;
-        std::cout << "Birthday: " << contact[7] << std::endl;
-        std::cout << "Favorite meal: " << contact[8] << std::endl;
-        std::cout << "Underwear color: " << contact[9] << std::endl;
-        std::cout << "Darkest secret: " << contact[10] << std::endl << std::endl;
+        const std::vector<std::string> labels = {
+            "First name",     "Last name",       "Nickname",      "Login",
+            "Postal address", "Email address",   "Phone number",  "Birthday",
+            "Favorite meal",  "Underwear color", "Darkest secret"};
+
+        for (size_t i = 0; i < contact.size(); ++i) {
+          std::cout << labels[i] << ": " << contact[i] << std::endl;
+        }
         bIsok = true;
+        break;
       }
     }
+
     if (!bIsok) {
       std::cout << "Contact not found" << std::endl;
     }
