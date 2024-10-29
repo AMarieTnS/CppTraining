@@ -5,7 +5,7 @@ CXX = g++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++17
 
 # Nom de l'exécutable
-TARGET = FragTrap
+TARGET = Borderland
 
 # Dossiers contenant les fichiers source et d'en-tête
 SRC_DIR = Sources
