@@ -2,13 +2,13 @@
 #include <iostream>
 
 void FragTrap::rangedAttack(std::string const &target) {
-  std::cout << "FR4G-TP " << sName << " attacks " << target
+  std::cout << "FR4G-TP : FragTrap : " << sName << " attacks " << target
             << " at range, causing " << iRangedAttackDamage
             << " points of damage!" << std::endl;
 }
 
 void FragTrap::meleeAttack(std::string const &target) {
-  std::cout << "FR4G-TP " << sName << " attacks " << target
+  std::cout << "FR4G-TP : FragTrap : " << sName << " attacks " << target
             << " at melee, causing " << iMeleeAttackDamage
             << " points of damage!" << std::endl;
 }
@@ -22,7 +22,7 @@ void FragTrap::takeDamage(unsigned int amount) {
   if (iHitPoints <= 0) {
     iHitPoints = 0;
   }
-  std::cout << "FR4G-TP " << sName << " takes " << damage
+  std::cout << "FR4G-TP : FragTrap : " << sName << " takes " << damage
             << " points of damage! Current HP: " << iHitPoints << std::endl;
 }
 
@@ -31,13 +31,13 @@ void FragTrap::beRepaired(unsigned int amount) {
   if (iHitPoints > iMaxHitPoints) {
     iEnergyPoints = iMaxHitPoints;
   }
-  std::cout << "FR4G-TP " << sName << " has repaired " << amount
+  std::cout << "FR4G-TP : FragTrap : " << sName << " has repaired " << amount
             << " points! Current HP: " << iHitPoints << std::endl;
 }
 
 std::string FragTrap::vaulthunter_dot_exe(std::string const &target) {
   if (iEnergyPoints < 25) {
-    std::cout << "FR4G-TP " << sName
+    std::cout << "FR4G-TP : FragTrap : " << sName
               << " try a vaulthunter_dot_exe but he has no energy" << std::endl;
   } else {
     iEnergyPoints -= 25;

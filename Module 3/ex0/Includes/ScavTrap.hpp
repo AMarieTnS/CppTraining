@@ -1,8 +1,8 @@
-#ifndef FRAGTRAP_HPP
-#define FRAGTRAP_HPP
+#ifndef SCAVTRAP_HPP
+#define SCAVTRAP_HPP
 #include <iostream>
 
-class FragTrap {
+class ScavTrap {
 public:
   int iHitPoints;
   int iMaxHitPoints;
@@ -16,35 +16,35 @@ public:
   int iArmorDamageReduction;
 
   // default constructor
-  FragTrap()
-      : iHitPoints(100), iMaxHitPoints(100), iEnergyPoints(100),
-        iMaxEnergyPoints(100), iLevel(1), sName("Default FragTrap name"),
-        iMeleeAttackDamage(30), iRangedAttackDamage(20),
-        iArmorDamageReduction(5) {
-    std::cout << "FragTrap : Default constructor created" << std::endl;
+  ScavTrap()
+      : iHitPoints(100), iMaxHitPoints(100), iEnergyPoints(50),
+        iMaxEnergyPoints(50), iLevel(1), sName("Default ScavTrap name"),
+        iMeleeAttackDamage(20), iRangedAttackDamage(15),
+        iArmorDamageReduction(3) {
+    std::cout << "ScavTrap : Default constructor created" << std::endl;
   }
   // constructor
-  FragTrap(std::string Name)
-      : iHitPoints(100), iMaxHitPoints(100), iEnergyPoints(100),
-        iMaxEnergyPoints(100), iLevel(1), sName(Name), iMeleeAttackDamage(30),
-        iRangedAttackDamage(20), iArmorDamageReduction(5) {
-    std::cout << "FragTrap : Constructor created" << std::endl;
+  ScavTrap(std::string Name)
+      : iHitPoints(100), iMaxHitPoints(100), iEnergyPoints(50),
+        iMaxEnergyPoints(50), iLevel(1), sName(Name), iMeleeAttackDamage(20),
+        iRangedAttackDamage(15), iArmorDamageReduction(3) {
+    std::cout << "ScavTrap : Constructor created" << std::endl;
   }
   // Destructor
-  ~FragTrap() { std::cout << "FragTrap : Destructor created" << std::endl; }
+  ~ScavTrap() { std::cout << "ScavTrap : Destructor created" << std::endl; }
   // copy
-  FragTrap(const FragTrap &copy)
+  ScavTrap(const ScavTrap &copy)
       : iHitPoints(copy.iHitPoints), iMaxHitPoints(copy.iMaxHitPoints),
         iEnergyPoints(copy.iEnergyPoints),
         iMaxEnergyPoints(copy.iMaxEnergyPoints), iLevel(copy.iLevel),
         sName(copy.sName), iMeleeAttackDamage(copy.iMeleeAttackDamage),
         iRangedAttackDamage(copy.iRangedAttackDamage),
         iArmorDamageReduction(copy.iArmorDamageReduction) {
-    std::cout << "FragTrap : Copy created" << std::endl;
+    std::cout << "ScavTrap : Copy created" << std::endl;
   }
 
   // affectation
-  FragTrap &operator=(const FragTrap &copy) {
+  ScavTrap &operator=(const ScavTrap &copy) {
     if (this != &copy) {
       iHitPoints = copy.iHitPoints;
       iMaxHitPoints = copy.iMaxHitPoints;
@@ -56,12 +56,12 @@ public:
       iRangedAttackDamage = copy.iRangedAttackDamage;
       iArmorDamageReduction = copy.iArmorDamageReduction;
     }
-    std::cout << "FragTrap : Assignation created" << std::endl;
+    std::cout << "ScavTrap : Assignation created" << std::endl;
 
     return *this;
   }
   // move
-  FragTrap(FragTrap &&move) noexcept
+  ScavTrap(ScavTrap &&move) noexcept
       : iHitPoints(move.iHitPoints), iMaxHitPoints(move.iMaxHitPoints),
         iEnergyPoints(move.iEnergyPoints),
         iMaxEnergyPoints(move.iMaxEnergyPoints), iLevel(move.iLevel),
@@ -77,10 +77,10 @@ public:
     iMeleeAttackDamage = 0;
     iRangedAttackDamage = 0;
     iArmorDamageReduction = 0;
-    std::cout << "FragTrap : Move" << std::endl;
+    std::cout << "ScavTrap : Move" << std::endl;
   }
   // affectation move
-  FragTrap &operator=(FragTrap &&move) noexcept {
+  ScavTrap &operator=(ScavTrap &&move) noexcept {
     if (this != &move) {
       iHitPoints = move.iHitPoints;
       iMaxHitPoints = move.iMaxHitPoints;
@@ -92,7 +92,7 @@ public:
       iRangedAttackDamage = move.iRangedAttackDamage;
       iArmorDamageReduction = move.iArmorDamageReduction;
     }
-    std::cout << "FragTrap : Assignation move" << std::endl;
+    std::cout << "ScavTrap : Assignation move" << std::endl;
     return *this;
   }
 
@@ -101,6 +101,6 @@ public:
   void takeDamage(unsigned int amount);
   void beRepaired(unsigned int amount);
 
-  std::string vaulthunter_dot_exe(std::string const &target);
+  std::string challengeNewcomer(std::string const &target);
 };
 #endif
