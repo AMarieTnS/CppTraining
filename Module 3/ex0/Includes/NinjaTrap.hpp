@@ -5,7 +5,7 @@
 #include "ScavTrap.hpp"
 #include <iostream>
 
-class NinjaTrap : public ClapTrap {
+class NinjaTrap : virtual public ClapTrap {
 public:
   // default constructor
   NinjaTrap() : ClapTrap("Default Ninja name") {

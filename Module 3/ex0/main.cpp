@@ -1,11 +1,13 @@
 #include "Includes/FragTrap.hpp"
 #include "Includes/NinjaTrap.hpp"
 #include "Includes/ScavTrap.hpp"
+#include "Includes/SuperTrap.hpp"
 
 int main() {
   FragTrap Claptrap1("JB");
   ScavTrap Claptrap2("Momo");
   NinjaTrap Claptrap3("Coco");
+  SuperTrap Claptrap4("Boss");
 
   srand(time(0));
 
@@ -40,5 +42,13 @@ int main() {
   Claptrap3.ninjaShoebox(Claptrap1);
   Claptrap3.ninjaShoebox(Claptrap2);
   Claptrap3.ninjaShoebox(Claptrap3);
+
+  // ex04
+  std::cout << std::endl << "############EX04############" << std::endl;
+  Claptrap4.rangedAttack("target1");
+  Claptrap4.meleeAttack("target3");
+
+  Claptrap4.ninjaShoebox(Claptrap1);
+  Claptrap4.vaulthunter_dot_exe("target1");
   return 0;
 }

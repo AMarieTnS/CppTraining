@@ -2,15 +2,23 @@
 #include <iostream>
 
 void ClapTrap::rangedAttack(std::string const &target) {
+  iHitPoints -= iRangedAttackDamage;
+  if (iHitPoints <= 0) {
+    iHitPoints = 0;
+  }
   std::cout << "FR4G-TP : ClapTrap : " << sName << " attacks " << target
             << " at range, causing " << iRangedAttackDamage
-            << " points of damage!" << std::endl;
+            << " points of damage! Current HP: " << iHitPoints << std::endl;
 }
 
 void ClapTrap::meleeAttack(std::string const &target) {
+  iHitPoints -= iMeleeAttackDamage;
+  if (iHitPoints <= 0) {
+    iHitPoints = 0;
+  }
   std::cout << "FR4G-TP : ClapTrap : " << sName << " attacks " << target
             << " at melee, causing " << iMeleeAttackDamage
-            << " points of damage!" << std::endl;
+            << " points of damage! Current HP: " << iHitPoints << std::endl;
 }
 
 void ClapTrap::takeDamage(unsigned int amount) {
