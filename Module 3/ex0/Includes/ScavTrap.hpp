@@ -5,7 +5,6 @@
 
 class ScavTrap : virtual public ClapTrap {
 public:
-  // default constructor
   ScavTrap() : ClapTrap("Default ScavTrap name") {
     iHitPoints = 100;
     iMaxHitPoints = 100;
@@ -18,7 +17,6 @@ public:
     std::cout << "ScavTrap : Default constructor created" << std::endl;
   }
 
-  // constructor
   ScavTrap(std::string Name) : ClapTrap(Name) {
     iHitPoints = 100;
     iMaxHitPoints = 100;
@@ -31,9 +29,16 @@ public:
     std::cout << "ScavTrap : Constructor created" << std::endl;
   }
 
-  // Destructor
   ~ScavTrap() { std::cout << "ScavTrap : Destructor created" << std::endl; }
 
-  std::string challengeNewcomer(std::string const &target);
+  template <typename T> std::string challengeNewcomer(T const &target) {
+    std::string Challenge[] = {" dice roll ", " rock paper scissors ",
+                               " olive throw ", " MMA match ",
+                               " duel of gazes "};
+    std::string sChallenge = Challenge[rand() % 5];
+    std::cout << "FR4G-TP : ScavTrap : " << sName << " Challengs " << target
+              << " to a " << sChallenge << std::endl;
+    return "0";
+  }
 };
 #endif

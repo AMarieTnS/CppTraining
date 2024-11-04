@@ -7,7 +7,6 @@
 
 class SuperTrap : public FragTrap, public NinjaTrap {
 public:
-  // default constructor
   SuperTrap() : ClapTrap(sName), FragTrap(sName), NinjaTrap(sName) {
     iHitPoints = FragTrap::iHitPoints;
     iMaxHitPoints = FragTrap::iMaxHitPoints;
@@ -19,7 +18,6 @@ public:
     iArmorDamageReduction = FragTrap::iArmorDamageReduction;
     std::cout << "SuperTrap : Default constructor created" << std::endl;
   }
-  // constructor
   SuperTrap(std::string sName)
       : ClapTrap(sName), FragTrap(sName), NinjaTrap(sName) {
     iHitPoints = FragTrap::iHitPoints;
@@ -32,7 +30,6 @@ public:
     iArmorDamageReduction = FragTrap::iArmorDamageReduction;
     std::cout << "SuperTrap : Constructor created" << std::endl;
   }
-  // Destructor
   ~SuperTrap() { std::cout << "SuperTrap : Destructor created" << std::endl; }
 
   using ClapTrap::meleeAttack;

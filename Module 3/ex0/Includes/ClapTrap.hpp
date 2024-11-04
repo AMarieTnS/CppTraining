@@ -104,9 +104,38 @@ public:
     return *this;
   }
 
-  void rangedAttack(std::string const &target);
-  void meleeAttack(std::string const &target);
-  void takeDamage(unsigned int amount);
-  void beRepaired(unsigned int amount);
+  template <typename T> void rangedAttack(T const &target) {
+    std::cout << "FR4G-TP : ClapTrap : " << sName << " attacks " << target
+              << " at range, causing " << iRangedAttackDamage
+              << " points of damage! Current HP: " << iHitPoints << std::endl;
+  }
+
+  template <typename T> void meleeAttack(T const &target) {
+    std::cout << "FR4G-TP : ClapTrap : " << sName << " attacks " << target
+              << " at melee, causing " << iMeleeAttackDamage
+              << " points of damage! Current HP: " << iHitPoints << std::endl;
+  }
+
+  template <typename T> void takeDamage(T amount) {
+    int damage = amount - iArmorDamageReduction;
+    if (damage < 0) {
+      damage = 0;
+    }
+    iHitPoints -= damage;
+    if (iHitPoints <= 0) {
+      iHitPoints = 0;
+    }
+    std::cout << "FR4G-TP : ClapTrap : " << sName << " takes " << damage
+              << " points of damage! Current HP: " << iHitPoints << std::endl;
+  }
+
+  template <typename T> void beRepaired(T amount) {
+    iHitPoints += amount;
+    if (iHitPoints > iMaxHitPoints) {
+      iHitPoints = iMaxHitPoints;
+    }
+    std::cout << "FR4G-TP : ClapTrap : " << sName << " has repaired " << amount
+              << " points! Current HP: " << iHitPoints << std::endl;
+  }
 };
 #endif

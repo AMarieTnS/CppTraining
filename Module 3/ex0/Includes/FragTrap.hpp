@@ -5,7 +5,6 @@
 
 class FragTrap : virtual public ClapTrap {
 public:
-  // default constructor
   FragTrap() : ClapTrap("Default FragTrap name") {
     iHitPoints = 100;
     iMaxHitPoints = 100;
@@ -17,7 +16,6 @@ public:
     iArmorDamageReduction = 5;
     std::cout << "FragTrap : Default constructor created" << std::endl;
   }
-  // constructor
   FragTrap(std::string Name) : ClapTrap(Name) {
     iHitPoints = 100;
     iMaxHitPoints = 100;
@@ -29,9 +27,23 @@ public:
     iArmorDamageReduction = 5;
     std::cout << "FragTrap : Constructor created" << std::endl;
   }
-  // Destructor
   ~FragTrap() { std::cout << "FragTrap : Destructor created" << std::endl; }
 
-  std::string vaulthunter_dot_exe(std::string const &target);
+  template <typename T> std::string vaulthunter_dot_exe(T const &target) {
+    if (iEnergyPoints < 25) {
+      std::cout << "FR4G-TP : FragTrap : " << sName
+                << " try a vaulthunter_dot_exe but he has no energy"
+                << std::endl;
+    } else {
+      iEnergyPoints -= 25;
+      std::string attacks[] = {" throws a grenade at ", " shoots a laser at ",
+                               " launches a rocket at ", " swings a sword at ",
+                               " fires a sniper shot at "};
+      std::string sAttack = attacks[rand() % 5];
+      std::cout << "FR4G-TP " << sName << sAttack << target << std::endl;
+    }
+    return "0";
+  }
 };
+
 #endif
