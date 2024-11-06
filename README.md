@@ -27,9 +27,13 @@ You will find all my training exercises C ++
   - `ex2` : Now we’re talking
   - `ex3` : Fixed point expressions
     
-- **Module 3** : Inheritance
+- **Module 3** : Inheritance V2
   - `ex0` : Aaaaand... OPEN!
   - `ex1` : Serena, my love!
   - `ex2` : Repetitive work
   - `ex3` : Now it’s easier!
   - `ex4` : Ultimate assault shoebox
+
+- **Module 4** : Subtype polymorphism, abstract classes, interfaces
+  - `ex0` : Polymorphism, or "When the sorcerer thinks you’d be cuter as a sheep"
+  - `ex1` : Exercise 01: I don’t want to set the world on fire + UML
