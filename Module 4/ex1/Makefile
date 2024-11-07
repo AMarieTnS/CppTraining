@@ -2,7 +2,7 @@
 CXX = g++
 
 # Options du compilateur
-CXXFLAGS = -Wall -Wextra -Werror -std=c++17
+CXXFLAGS = -Wall -Wextra -Werror -std=c++17 -g
 
 # Nom de l'exécutable
 TARGET = Wasteland 

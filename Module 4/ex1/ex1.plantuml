@@ -1,0 +1,80 @@
+@startuml Module 3 ex 1
+class AWeapon {
+  - sName: string
+  - iApcost: int
+  - iDamage: int
+  + AWeapon(string, int, int)
+  + ~AWeapon()
+  + getName(): string
+  + getAPCost(): int
+  + getDamage(): int
+  + Attack(): void
+}
+
+class Character {
+  - sName: string
+  - iAP: int
+  - Weapon: AWeapon*
+  + Character(string)
+  + ~Character()
+  + recoverAP(): void
+  + equip(AWeapon*): void
+  + attack(Enemy*): void
+  + getName(): string
+  + getAP(): int
+  + getWeapon(): AWeapon*
+}
+
+class Enemy {
+  - iHp: int
+  - sType: string
+  + Enemy(int, string)
+  + ~Enemy()
+  + getType(): string
+  + getHP(): int
+  + takeDamage(int): void
+}
+
+class PlasmaRifle {
+  - sName: string = "Plasma Rifle"
+  - iApcost: int = 5
+  - iDamage: int = 21
+  + PlasmaRifle()
+  + ~PlasmaRifle()
+  + attack(): void
+}
+
+class PowerFist {
+  - sName: string = "Power Fist"
+  - iApcost: int = 8
+  - iDamage: int = 50
+  + PowerFist()
+  + ~PowerFist()
+  + attack(): void
+}
+
+class RadScorpion {
+  - iHp: int
+  - sType: string
+  + RadScorpion()
+  + ~RadScorpion()
+  + Attack(): void
+}
+
+class SuperMutant {
+  - iHp: int
+  - sType: string
+  + SuperMutant()
+  + ~SuperMutant()
+  + Attack(): void
+}
+Character --> AWeapon : uses
+Character --> Enemy : attacks
+AWeapon <|-- PlasmaRifle
+AWeapon <|-- PowerFist
+Enemy <|-- RadScorpion
+Enemy <|-- SuperMutant
+
+
+
+@enduml
