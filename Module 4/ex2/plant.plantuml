@@ -1,0 +1,47 @@
+@startuml Module4Ex2
+class AssaultTerminator {
+  + AssaultTerminator()
+  + ~AssaultTerminator()
+  + clone() const: ISpaceMarine*
+  + battleCry() const: void 
+  + rangedAttack() const: void
+  + meleeAttack() const: void
+}
+
+class ISpaceMarine {
+  + ~ISpaceMarine()
+  + clone() const: ISpaceMarine*
+  + battleCry() const: void
+  + rangedAttack() const: void
+  + meleeAttack() const: void
+}
+class ISquad {
+  + ~ISquad()
+  + getCount() const: int
+  + getUnit(int) const: ISpaceMarine*
+  + push(ISpaceMarine *): int
+}
+class Squad {
+  - NthUnit: std::vector<ISpaceMarine *> 
+  + Squad()
+  + ~Squad()
+  + getCount() const: int
+  + getUnit(int) const: ISpaceMarine*
+  + push(ISpaceMarine *NthUnit): int
+}
+class TacticalMarine {
+  + TacticalMarine()
+  + ~TacticalMarine()
+  + clone() const: ISpaceMarine*
+  + battleCry() const: void
+  + rangedAttack() const: void
+  + meleeAttack() const: void
+}
+
+ISpaceMarine <|-- AssaultTerminator
+ISpaceMarine <|-- TacticalMarine
+ISquad <|-- Squad
+
+Squad --> ISpaceMarine : contains
+
+@enduml
