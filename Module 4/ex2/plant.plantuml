@@ -1,4 +1,4 @@
-@startuml Module4Ex2
+@startuml UMLModule4Ex2
 class AssaultTerminator {
   + AssaultTerminator()
   + ~AssaultTerminator()
@@ -8,14 +8,14 @@ class AssaultTerminator {
   + meleeAttack() const: void
 }
 
-class ISpaceMarine {
+abstract class ISpaceMarine {
   + ~ISpaceMarine()
   + clone() const: ISpaceMarine*
   + battleCry() const: void
   + rangedAttack() const: void
   + meleeAttack() const: void
 }
-class ISquad {
+abstract class ISquad {
   + ~ISquad()
   + getCount() const: int
   + getUnit(int) const: ISpaceMarine*
