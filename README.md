@@ -37,3 +37,6 @@ You will find all my training exercises C ++
 - **Module 4** : Subtype polymorphism, abstract classes, interfaces
   - `ex0` : Polymorphism, or "When the sorcerer thinks you’d be cuter as a sheep"
   - `ex1` : Exercise 01: I don’t want to set the world on fire + UML
+  - `ex2` : This code is unclean. PURIFY IT!
+  - `ex3` : Bocal Fantasy
+  - `ex4` :   AFK Mining
