@@ -20,19 +20,20 @@ public:
     const char *what() const noexcept override { return "Grade too low"; }
   };
 
-  Bureaucrat(const std::string &sName, int iGrade);
+    Bureaucrat(const std::string &sName, int iGrade);
 
-  std::string GetName() const noexcept;
-  int GetGrade() const noexcept;
+    std::string GetName() const noexcept;
+    int GetGrade() const noexcept;
 
-  void IncrementGrade();
-  void DecrementGrade();
+    void IncrementGrade();
+    void DecrementGrade();
 
-  void signForm(Form &form);
+    void signForm(Form &form);
+    void executeForm(Form const &form) const;
 
-private:
-  const std::string sName;
-  int iGrade;
+  private:
+    const std::string sName;
+    int iGrade;
 };
 
 std::ostream &operator<<(std::ostream &os, const Bureaucrat &bureaucrat);

@@ -22,7 +22,6 @@ void Bureaucrat::IncrementGrade() {
   --iGrade;
 }
 
-
 void Bureaucrat::DecrementGrade() {
   if (iGrade >= 150) {
     throw GradeTooLowException();
@@ -36,6 +35,16 @@ void Bureaucrat::signForm(Form &form) {
     std::cout << sName << " signs " << form.GetName() << std::endl;
   } catch (const std::exception &e) {
     std::cout << sName << " cannot sign " << form.GetName() << " because "
+              << e.what() << std::endl;
+  }
+}
+
+void Bureaucrat::executeForm(Form const &form) const {
+  try {
+    form.execute(*this);
+    std::cout << sName << " executes " << form.GetName() << std::endl;
+  } catch (const std::exception &e) {
+    std::cout << sName << " cannot execute " << form.GetName() << " because "
               << e.what() << std::endl;
   }
 }

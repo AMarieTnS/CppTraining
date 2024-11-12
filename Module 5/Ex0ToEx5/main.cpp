@@ -1,9 +1,16 @@
 #include "Bureaucrat.hpp"
 #include "Form.hpp"
+#include "PresidentialPardonForm.hpp"
+#include "RobotomyRequestForm.hpp"
+#include "ShrubberyCreationForm.hpp"
 
 int main() {
   try {
+    // Ex0
     Bureaucrat Pedro("Pedro", 50);
+    Bureaucrat PedroBis("PedroBis", 50);
+    Bureaucrat PedroPresident("PedroPresident", 5);
+
     Bureaucrat PedroLow("PedroLow", 150);
     Bureaucrat PedroHigh("PedroHigh", 1);
 
@@ -28,9 +35,10 @@ int main() {
       std::cerr << "Exception caught: " << e.what() << std::endl;
     }
 
+    // Ex1
     std::cout << std::endl << "##Form##" << std::endl;
     try {
-      Form Major("Major", 50, 50);
+      ShrubberyCreationForm Major("Major");
       std::cout << Major << std::endl;
       Pedro.signForm(Major);
       std::cout << Major << std::endl;
@@ -39,25 +47,39 @@ int main() {
     }
 
     try {
-      Form InvalidFormHigh("InvalidFormHigh", 0, 50);
+      ShrubberyCreationForm InvalidFormHigh("InvalidFormHigh");
     } catch (const std::exception &e) {
       std::cerr << "Exception caught: " << e.what() << std::endl;
     }
 
     try {
-      Form InvalidFormLow("InvalidFormLow", 151, 50);
+      ShrubberyCreationForm InvalidFormLow("InvalidFormLow");
     } catch (const std::exception &e) {
       std::cerr << "Exception caught: " << e.what() << std::endl;
     }
 
     try {
-      Form Amiral("Amiral", 150, 50);
+      ShrubberyCreationForm Amiral("Amiral");
       std::cout << Amiral << std::endl;
       PedroLow.signForm(Amiral);
       std::cout << Amiral << std::endl;
     } catch (const std::exception &e) {
       std::cerr << "Exception caught: " << e.what() << std::endl;
     }
+
+    // Ex2
+    std::cout << std::endl << "##Robot & Shrubbery##" << std::endl;
+
+    ShrubberyCreationForm Shrubbery("Home");
+    RobotomyRequestForm Robot("Garden");
+    PresidentialPardonForm President("Bulding");
+
+    Pedro.signForm(Shrubbery);
+    Pedro.executeForm(Shrubbery);
+    PedroBis.signForm(Robot);
+    PedroBis.executeForm(Robot);
+    PedroPresident.signForm(President);
+    PedroPresident.executeForm(President);
 
   } catch (const std::exception &e) {
     std::cerr << "Exception caught in main: " << e.what() << std::endl;

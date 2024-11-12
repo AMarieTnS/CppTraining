@@ -15,9 +15,7 @@ Form::Form(const std::string &sName, int iGradeSign, int iGradeExecute)
 std::string Form::GetName() const noexcept { return sName; }
 bool Form::isSigned() const noexcept { return bSigned; }
 int Form::GetGradeSign() const noexcept { return iGradeSign; }
-
 int Form::GetGradeExecute() const noexcept { return iGradeExecute; }
-
 bool Form::GetSigned() const noexcept { return bSigned; }
 
 void Form::beSigned(const Bureaucrat &bureaucrat) {
