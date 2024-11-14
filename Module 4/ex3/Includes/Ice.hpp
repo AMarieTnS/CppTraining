@@ -4,14 +4,11 @@
 #include <iostream>
 
 class Ice : public AMateria {
-private:
-  std::string sName;
-
 public:
   Ice();
-  virtual ~Ice();
-  virtual AMateria *clone() const;
-  virtual void use(ICharacter &target);
+  ~Ice() = default;
+  Ice *clone() const override;
+  void use(ICharacter &target) override;
 };
 
 #endif

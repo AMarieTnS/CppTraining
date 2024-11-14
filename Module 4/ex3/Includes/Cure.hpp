@@ -3,13 +3,12 @@
 #include "AMateria.hpp"
 #include <iostream>
 
-
 class Cure : public AMateria {
 public:
   Cure();
-  virtual ~Cure();
-  virtual AMateria *clone() const;
-  virtual void use(ICharacter &target);
+  ~Cure() = default;
+  AMateria *clone() const override;
+  void use(ICharacter &target) override;
 };
 
 #endif

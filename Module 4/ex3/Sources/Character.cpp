@@ -1,53 +1,60 @@
 #include "Character.hpp"
 #include "AMateria.hpp"
 
-Character::Character(std::string const &sName) : sName(sName) {
-  Inventory.fill(nullptr);
+Character::Character(std::string const &name) : _name(name) {
+  _inventory.fill(nullptr);
 }
-Character::Character(Character const &Copy) : sName(Copy.sName) {
-  for (size_t i = 0; i < Inventory.size(); ++i) {
-    if (Copy.Inventory[i])
-      Inventory[i] = Copy.Inventory[i]->clone();
+
+Character::Character(Character const &copy) : _name(copy._name) {
+  for (size_t i = 0; i < _inventory.size(); ++i) {
+    if (copy._inventory[i])
+      _inventory[i] = copy._inventory[i]->clone();
     else
-      Inventory[i] = nullptr;
+      _inventory[i] = nullptr;
   }
 }
-Character &Character::operator=(Character const &Overload) {
-  if (this != &Overload) {
-    sName = Overload.sName;
-    for (size_t i = 0; i < Inventory.size(); ++i) {
-      if (Inventory[i])
-        delete Inventory[i];
-      if (Overload.Inventory[i])
-        Inventory[i] = Overload.Inventory[i]->clone();
+
+Character &Character::operator=(Character const &other) {
+  if (this != &other) {
+    _name = other._name;
+    for (size_t i = 0; i < _inventory.size(); ++i) {
+      if (_inventory[i])
+        delete _inventory[i];
+      if (other._inventory[i])
+        _inventory[i] = other._inventory[i]->clone();
       else
-        Inventory[i] = nullptr;
+        _inventory[i] = nullptr;
     }
   }
   return *this;
 }
+
 Character::~Character() {
-  for (size_t i = 0; i < Inventory.size(); ++i) {
-    if (Inventory[i])
-      delete Inventory[i];
+  for (size_t i = 0; i < _inventory.size(); ++i) {
+    if (_inventory[i])
+      delete _inventory[i];
   }
 }
 
-std::string const &Character::getName() const { return sName; }
+std::string const &Character::getName() const { return _name; }
 
 void Character::equip(AMateria *m) {
-  for (size_t i = 0; i < Inventory.size(); ++i) {
-    if (!Inventory[i]) {
-      Inventory[i] = m;
+  for (size_t i = 0; i < _inventory.size(); ++i) {
+    if (!_inventory[i]) {
+      _inventory[i] = m;
       break;
     }
   }
 }
+
 void Character::unequip(int idx) {
-  if (idx >= 0 && idx < static_cast<int>(Inventory.size()))
-    Inventory[idx] = nullptr;
+  if (idx >= 0 && idx < static_cast<int>(_inventory.size()))
+    _inventory[idx] = nullptr;
 }
+
 void Character::use(int idx, ICharacter &target) {
-  if (idx >= 0 && idx < static_cast<int>(Inventory.size()) && Inventory[idx])
-    Inventory[idx]->use(target);
+  if (idx >= 0 && idx < static_cast<int>(_inventory.size()) && _inventory[idx])
+    _inventory[idx]->use(target);
+  std::cout << "Materia " << _inventory[idx]->getType() << " now has "
+            << _inventory[idx]->getXP() << " XP." << std::endl;
 }

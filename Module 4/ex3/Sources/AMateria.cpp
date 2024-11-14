@@ -1,10 +1,8 @@
 #include "AMateria.hpp"
 
-AMateria::AMateria(std::string const &type) : sTypes(type), _xp(0) {}
+AMateria::AMateria(std::string const &type) : _type(type), _xp(0) {}
 
-AMateria::~AMateria() {}
-
-std::string const &AMateria::getType() const { return sTypes; }
+std::string const &AMateria::getType() const { return _type; }
 
 unsigned int AMateria::getXP() const { return _xp; }
 

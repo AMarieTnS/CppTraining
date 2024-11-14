@@ -6,22 +6,22 @@
 #include <iostream>
 #include <string>
 
-
 class Character : public ICharacter {
 private:
-  std::array<AMateria *, 4> Inventory;
-  std::string sName;
+  static constexpr int INVENTORY_SIZE = 4;
+  std::array<AMateria *, INVENTORY_SIZE> _inventory;
+  std::string _name;
 
 public:
-  Character(std::string const &sName);
-  Character(Character const &Copy);
-  Character &operator=(Character const &Overload);
-  virtual ~Character();
+  Character(std::string const &name);
+  Character(Character const &copy);
+  Character &operator=(Character const &other);
+  ~Character();
 
-  std::string const &getName() const;
-  void equip(AMateria *m);
-  void unequip(int idx);
-  void use(int idx, ICharacter &target);
+  std::string const &getName() const override;
+  void equip(AMateria *m) override;
+  void unequip(int idx) override;
+  void use(int idx, ICharacter &target) override;
 };
 
 #endif
