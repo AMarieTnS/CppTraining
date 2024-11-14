@@ -20,24 +20,24 @@ public:
     const char *what() const noexcept override { return "Grade too low"; }
   };
 
-    Form(const std::string &sName, int iGradeSign, int iGradeExecute);
-    virtual ~Form() {}
+  Form(const std::string &name, int gradeSign, int gradeExecute);
+  virtual ~Form() {}
 
-    std::string GetName() const noexcept;
-    bool isSigned() const noexcept;
+  std::string getName() const noexcept;
+  bool isSigned() const noexcept;
 
-    int GetGradeSign() const noexcept;
-    int GetGradeExecute() const noexcept;
-    bool GetSigned() const noexcept;
+  int getGradeSign() const noexcept;
+  int getGradeExecute() const noexcept;
+  bool getSigned() const noexcept;
 
-    void beSigned(const Bureaucrat &bureaucrat);
-    virtual void execute(Bureaucrat const &executor) const = 0;
+  void beSigned(const Bureaucrat &bureaucrat);
+  virtual void execute(Bureaucrat const &executor) const = 0;
 
-  private:
-    const std::string sName;
-    const int iGradeSign;
-    const int iGradeExecute;
-    bool bSigned;
+private:
+  const std::string _name;
+  const int _gradeSign;
+  const int _gradeExecute;
+  bool _signed;
 };
 
 std::ostream &operator<<(std::ostream &os, const Form &form);

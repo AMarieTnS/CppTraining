@@ -8,12 +8,12 @@
 
 class PresidentialPardonForm : public Form {
 public:
-  PresidentialPardonForm(const std::string &sTarget);
-  virtual ~PresidentialPardonForm();
+  PresidentialPardonForm(const std::string &target);
+  virtual ~PresidentialPardonForm() = default;
   void execute(Bureaucrat const &executor) const override;
 
 private:
-  std::string sTarget;
+  std::string _target;
 };
 
 #endif

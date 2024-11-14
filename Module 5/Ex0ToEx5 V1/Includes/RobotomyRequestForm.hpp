@@ -8,12 +8,12 @@
 
 class RobotomyRequestForm : public Form {
 public:
-  RobotomyRequestForm(const std::string &sTarget);
-  virtual ~RobotomyRequestForm();
+  RobotomyRequestForm(const std::string &target);
+  virtual ~RobotomyRequestForm() = default;
   void execute(Bureaucrat const &executor) const override;
 
 private:
-  std::string sTarget;
+  std::string _target;
 };
 
 #endif

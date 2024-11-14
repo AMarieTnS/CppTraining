@@ -8,12 +8,12 @@
 
 class ShrubberyCreationForm : public Form {
 public:
-  ShrubberyCreationForm(const std::string &sTarget);
-  virtual ~ShrubberyCreationForm();
+  ShrubberyCreationForm(const std::string &target);
+  virtual ~ShrubberyCreationForm() = default;
   void execute(Bureaucrat const &executor) const override;
 
 private:
-  std::string sTarget;
+  std::string _target;
 };
 
 #endif
