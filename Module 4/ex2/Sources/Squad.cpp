@@ -1,18 +1,17 @@
 #include "Squad.hpp"
 #include <algorithm>
 
-Squad::Squad() {}
 Squad::~Squad() {
-  for (size_t Index = 0; Index < NthUnit.size(); Index++) {
-    delete NthUnit[Index];
+  for (size_t Index = 0; Index < _nthUnit.size(); Index++) {
+    delete _nthUnit[Index];
   }
 }
 
-int Squad::getCount() const { return NthUnit.size(); }
+int Squad::getCount() const { return _nthUnit.size(); }
 
 ISpaceMarine *Squad::getUnit(int index) const {
-  ISpaceMarine *NumberCount = NthUnit[index];
-  if (index < 0 || index >= static_cast<int>(NthUnit.size())) {
+  ISpaceMarine *NumberCount = _nthUnit[index];
+  if (index < 0 || index >= static_cast<int>(_nthUnit.size())) {
     NumberCount = nullptr;
   }
   return NumberCount;
@@ -20,12 +19,12 @@ ISpaceMarine *Squad::getUnit(int index) const {
 
 int Squad::push(ISpaceMarine *marine) {
   if (marine) {
-    for (size_t i = 0; i < NthUnit.size(); ++i) {
-      if (NthUnit[i] == marine) {
-        return NthUnit.size();
+    for (size_t i = 0; i < _nthUnit.size(); ++i) {
+      if (_nthUnit[i] == marine) {
+        return _nthUnit.size();
       }
     }
-    NthUnit.push_back(marine);
+    _nthUnit.push_back(marine);
   }
-  return NthUnit.size();
+  return _nthUnit.size();
 }

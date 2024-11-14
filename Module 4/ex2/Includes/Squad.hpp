@@ -6,15 +6,15 @@
 
 class Squad : public ISquad {
 private:
-  std::vector<ISpaceMarine *> NthUnit;
+  std::vector<ISpaceMarine *> _nthUnit;
 
 public:
-  Squad();
+  Squad() = default;
   ~Squad();
 
-  int getCount() const;
-  ISpaceMarine *getUnit(int) const;
-  int push(ISpaceMarine *NthUnit);
+  int getCount() const override;
+  ISpaceMarine *getUnit(int) const override;
+  int push(ISpaceMarine *nthUnit) override;
 };
 
 #endif

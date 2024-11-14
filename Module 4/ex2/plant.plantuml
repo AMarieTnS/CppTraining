@@ -22,7 +22,7 @@ abstract class ISquad {
   + push(ISpaceMarine *): int
 }
 class Squad {
-  - NthUnit: std::vector<ISpaceMarine *> 
+  - _nthUnit: std::vector<ISpaceMarine *> 
   + Squad()
   + ~Squad()
   + getCount() const: int

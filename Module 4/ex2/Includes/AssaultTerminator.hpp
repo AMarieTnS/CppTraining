@@ -8,10 +8,10 @@ public:
   AssaultTerminator();
   ~AssaultTerminator();
 
-  ISpaceMarine *clone() const;
-  void battleCry() const;
-  void rangedAttack() const;
-  void meleeAttack() const;
+  ISpaceMarine *clone() const override;
+  void battleCry() const override;
+  void rangedAttack() const override;
+  void meleeAttack() const override;
 };
 
 #endif
