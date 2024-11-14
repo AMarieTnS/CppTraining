@@ -1,8 +1,8 @@
 @startuml UMLModule4Ex1
 abstract class AWeapon {
-  - sName: string
-  - iApcost: int
-  - iDamage: int
+  - _name: string
+  - _apCost: int
+  - _damage: int
   + AWeapon(string, int, int)
   + ~AWeapon()
   + getName(): string
@@ -12,9 +12,9 @@ abstract class AWeapon {
 }
 
 class Character {
-  - sName: string
-  - iAP: int
-  - Weapon: AWeapon*
+  - _name: string
+  - _ap: int
+  - AWeapon *_weapon
   + Character(string)
   + ~Character()
   + recoverAP(): void
@@ -25,9 +25,9 @@ class Character {
   + getWeapon(): AWeapon*
 }
 
-class Enemy {
-  - iHp: int
-  - sType: string
+interface Enemy {
+  - _hp: int
+  - _type: string
   + Enemy(int, string)
   + ~Enemy()
   + getType(): string
@@ -36,40 +36,36 @@ class Enemy {
 }
 
 class PlasmaRifle {
-  - sName: string = "Plasma Rifle"
-  - iApcost: int = 5
-  - iDamage: int = 21
+  - _name: string = "Plasma Rifle"
+  - _apCost: int = 5
+  - _damage: int = 21
   + PlasmaRifle()
   + ~PlasmaRifle()
   + attack(): void
 }
 
 class PowerFist {
-  - sName: string = "Power Fist"
-  - iApcost: int = 8
-  - iDamage: int = 50
+  - _name: string = "Power Fist"
+  - _apCost: int = 8
+  - _damage: int = 50
   + PowerFist()
   + ~PowerFist()
   + attack(): void
 }
 
 class RadScorpion {
-  - iHp: int
-  - sType: string
   + RadScorpion()
   + ~RadScorpion()
-  + Attack(): void
+  + attack(): void
 }
 
 class SuperMutant {
-  - iHp: int
-  - sType: string
   + SuperMutant()
   + ~SuperMutant()
-  + Attack(): void
+  + attack(): void
 }
-Character --> AWeapon : uses
-Character --> Enemy : attacks
+Character *-- "1" AWeapon
+Character o-- "0..*" Enemy
 AWeapon <|-- PlasmaRifle
 AWeapon <|-- PowerFist
 Enemy <|-- RadScorpion

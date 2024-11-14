@@ -7,7 +7,6 @@ public:
   SuperMutant();
   ~SuperMutant();
   SuperMutant(const SuperMutant &copy);
-  SuperMutant &operator=(const SuperMutant &Overload);
-  void Attack() const;
+  SuperMutant &operator=(const SuperMutant &other);
 };
 #endif

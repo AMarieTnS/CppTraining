@@ -5,7 +5,7 @@
 class PlasmaRifle : public AWeapon {
 public:
   PlasmaRifle();
-  virtual ~PlasmaRifle();
-  void attack() const;
+  virtual ~PlasmaRifle() = default;
+  void attack() const override;
 };
 #endif

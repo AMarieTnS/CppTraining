@@ -8,13 +8,9 @@ RadScorpion::~RadScorpion() { std::cout << "* SPROTCH *" << std::endl; }
 
 RadScorpion::RadScorpion(const RadScorpion &copy) : Enemy(copy) {}
 
-RadScorpion &RadScorpion::operator=(const RadScorpion &Overload) {
-  if (this != &Overload) {
-    Enemy::operator=(Overload);
+RadScorpion &RadScorpion::operator=(const RadScorpion &other) {
+  if (this != &other) {
+    Enemy::operator=(other);
   }
   return *this;
-}
-
-void RadScorpion::Attack() const {
-  std::cout << "piouuu piouuu piouuu" << std::endl;
 }

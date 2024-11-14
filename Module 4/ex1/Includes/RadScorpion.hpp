@@ -7,7 +7,6 @@ public:
   RadScorpion();
   ~RadScorpion();
   RadScorpion(const RadScorpion &copy);
-  RadScorpion &operator=(const RadScorpion &Overload);
-  void Attack() const;
+  RadScorpion &operator=(const RadScorpion &other);
 };
 #endif

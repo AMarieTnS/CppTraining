@@ -5,7 +5,7 @@
 class PowerFist : public AWeapon {
 public:
   PowerFist();
-  virtual ~PowerFist();
-  void attack() const;
+  virtual ~PowerFist() = default;
+  void attack() const override;
 };
 #endif

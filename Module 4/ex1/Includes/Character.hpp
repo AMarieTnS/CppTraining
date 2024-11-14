@@ -5,21 +5,23 @@
 #include <iostream>
 
 class Character {
-private:
-  std::string sName;
-  int iAP;
-  AWeapon *Weapon;
-
 public:
-  Character(std::string const &sName);
-  virtual ~Character();
+  Character(const std::string &name);
+  ~Character() = default;
+
   void recoverAP();
-  void equip(AWeapon *Weapon);
-  void attack(Enemy *Enemy);
-  std::string virtual getName() const;
-  int virtual getAP() const;
+  void equip(AWeapon *newWeapon);
+  void attack(Enemy *enemy);
+
+  std::string getName() const;
+  int getAP() const;
   AWeapon *getWeapon() const;
+
+private:
+  std::string _name;
+  int _ap;
+  AWeapon *_weapon;
 };
-std::ostream &operator<<(std::ostream &out, const Character &Character);
+std::ostream &operator<<(std::ostream &out, const Character &character);
 
 #endif
