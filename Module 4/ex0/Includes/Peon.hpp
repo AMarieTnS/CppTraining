@@ -4,12 +4,12 @@
 
 class Peon : public Victim {
 public:
-  Peon();
-  Peon(const std::string &sName);
+  Peon() = delete;
+  Peon(const std::string &name);
   ~Peon();
   Peon(const Peon &copy);
-  Peon &operator=(const Peon &Overload);
-  virtual void getPolymorphed() const;
+  Peon &operator=(const Peon &overload);
+  void getPolymorphed() const override;
 };
 
 #endif

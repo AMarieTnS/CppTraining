@@ -5,15 +5,15 @@
 class Victim {
 public:
   Victim();
-  Victim(const std::string &sName);
-  ~Victim();
+  Victim(const std::string &name);
+  virtual ~Victim();
   Victim(const Victim &copy);
-  Victim &operator=(const Victim &Overload);
+  Victim &operator=(const Victim &overload);
   std::string getName() const;
   virtual void getPolymorphed() const;
 
 private:
-  std::string sName;
+  std::string _name;
 };
 std::ostream &operator<<(std::ostream &out, const Victim &victim);
 

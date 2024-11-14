@@ -1,14 +1,14 @@
 #include "../Includes/Peon.hpp"
 #include <iostream>
 
-Peon::Peon(const std::string &sName) : Victim(sName) {
+Peon::Peon(const std::string &name) : Victim(name) {
   std::cout << "Zog zog." << std::endl;
 }
 Peon::~Peon() { std::cout << "Bleuark..." << std::endl; }
 Peon::Peon(const Peon &copy) : Victim(copy) {}
-Peon &Peon::operator=(const Peon &Overload) {
-  if (this != &Overload) {
-    Victim::operator=(Overload);
+Peon &Peon::operator=(const Peon &overload) {
+  if (this != &overload) {
+    Victim::operator=(overload);
   }
   return *this;
 }

@@ -5,20 +5,18 @@
 
 class Sorcerer {
 public:
-  Sorcerer();
-  Sorcerer(const std::string &sName, const std::string &sTitle);
+  Sorcerer() = delete;
+  Sorcerer(const std::string &name, const std::string &title);
   ~Sorcerer();
   Sorcerer(const Sorcerer &copy);
   Sorcerer &operator=(const Sorcerer &Overload);
   std::string getName() const;
   std::string getTitle() const;
-  void setName(std::string const sName);
-  void setTitle(std::string const sTitle);
-  void polymorph(Victim const &victim) const;
+  void polymorph(const Victim &victim) const;
 
 private:
-  std::string sName;
-  std::string sTitle;
+  std::string _name;
+  std::string _title;
 };
 
 std::ostream &operator<<(std::ostream &out, const Sorcerer &sorcerer);
