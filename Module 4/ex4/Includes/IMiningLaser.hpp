@@ -6,7 +6,7 @@ class IAsteroid;
 
 class IMiningLaser {
 public:
-  virtual ~IMiningLaser() {}
+  virtual ~IMiningLaser() = default;
   virtual void mine(IAsteroid *) = 0;
 };
 

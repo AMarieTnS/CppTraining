@@ -6,7 +6,7 @@
 
 class IAsteroid {
 public:
-  virtual ~IAsteroid() {}
+  virtual ~IAsteroid() = default;
   virtual std::string beMined(class StripMiner *) const = 0;
   virtual std::string beMined(class DeepCoreMiner *) const = 0;
 

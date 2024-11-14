@@ -6,7 +6,7 @@
 
 class DeepCoreMiner : public IMiningLaser {
 public:
-  void mine(IAsteroid *Result);
+  void mine(IAsteroid *result) override;
 };
 
 #endif

@@ -5,7 +5,7 @@
 
 class StripMiner : public IMiningLaser {
 public:
-  void mine(IAsteroid *Result);
+  void mine(IAsteroid *result) override;
 };
 
 #endif

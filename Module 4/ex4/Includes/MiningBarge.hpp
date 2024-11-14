@@ -11,8 +11,8 @@ public:
   void mine(IAsteroid *) const;
 
 private:
-  std::array<IMiningLaser *, 4> Laser;
-  int iNunberLaser;
+  std::array<IMiningLaser *, 4> _laser;
+  int _nunberLaser;
 };
 
 #endif

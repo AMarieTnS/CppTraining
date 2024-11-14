@@ -1,17 +1,17 @@
 #include "MiningBarge.hpp"
 
-MiningBarge::MiningBarge() : iNunberLaser(0) { Laser.fill(nullptr); }
+MiningBarge::MiningBarge() : _nunberLaser(0) { _laser.fill(nullptr); }
 
 void MiningBarge::equip(IMiningLaser *laser) {
-  if (iNunberLaser < 5) {
-    Laser[iNunberLaser++] = laser;
+  if (_nunberLaser < 5) {
+    _laser[_nunberLaser++] = laser;
   };
 }
 
 void MiningBarge::mine(IAsteroid *aste) const {
-  for (int i = 0; i < iNunberLaser; ++i) {
-    if (Laser[i]) {
-      Laser[i]->mine(aste);
+  for (int i = 0; i < _nunberLaser; ++i) {
+    if (_laser[i]) {
+      _laser[i]->mine(aste);
     }
   }
 }

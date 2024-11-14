@@ -1,6 +1,6 @@
 #include "DeepCoreMiner.hpp"
 
-void DeepCoreMiner::mine(IAsteroid *Result) {
-  std::cout << "* mining deep... got " << Result->beMined(this) << "! *"
+void DeepCoreMiner::mine(IAsteroid *result) {
+  std::cout << "* mining deep... got " << result->beMined(this) << "! *"
             << std::endl;
 }
