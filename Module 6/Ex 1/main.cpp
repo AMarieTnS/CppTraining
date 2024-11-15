@@ -1,12 +1,21 @@
-#include "Conversion.hpp"
+#include "Data.hpp"
+#include "Serialization.hpp"
+#include <cstdlib>
+#include <ctime>
 #include <iostream>
 
-int main(int argc, char *argv[]) {
-  if (argc != 2) {
-    std::cerr << "Usage: " << argv[0] << " <literal>" << std::endl;
-    return 1;
-  }
-  Conversion conversion(argv[1]);
-  conversion.convert();
+int main() {
+  std::srand(std::time(0));
+
+  void *raw = serialize();
+  Data *data = deserialize(raw);
+
+  std::cout << "s1: " << data->s1 << std::endl;
+  std::cout << "n: " << data->n << std::endl;
+  std::cout << "s2: " << data->s2 << std::endl;
+
+  delete[] static_cast<char *>(raw);
+  delete data;
+
   return 0;
 }

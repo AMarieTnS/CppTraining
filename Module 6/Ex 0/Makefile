@@ -5,7 +5,7 @@ CXX = g++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++17 -g
 
 # Nom de l'exécutable
-TARGET =  Serialization
+TARGET =  ScalarConversion
 
 # Dossiers contenant les fichiers source et d'en-tête
 SRC_DIR = Sources
