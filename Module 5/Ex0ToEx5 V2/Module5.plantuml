@@ -1,0 +1,85 @@
+@startuml UMLModule4Ex1
+class Bureaucrat {
+  - _name: string
+  - _grade: int
+  + Bureaucrat(string, int)
+  + getName(): string
+  + getGrade(): int
+  + incrementGrade(): void
+  + decrementGrade(): void
+  + signForm(Form): void
+  + executeForm(Form): void
+}
+
+abstract class Form {
+  - _name: string
+  - _signed: bool 
+  - _gradeSign: int
+  - _gradeExecute: int
+  + Form(string, int, int)
+  + ~Form()
+  + &getName(): string
+  + isSigned(): bool
+  + getGradeSign(): int
+  + getGradeExecute(): int
+  + beSigned(Bureaucrat): void
+  + execute(Bureaucrat: void 
+  + getTarget(): string
+}
+
+class Intern {
+  + Intern()
+  + ~Intern()
+  + makeForm(string, string): Form
+}
+
+class OfficeBlock {
+  - _intern: Intern
+  - _signing: Bureaucrat
+  - _executing: Bureaucrat
+  + OfficeBlock()
+  + OfficeBlock(Intern, Bureaucrat, Bureaucrat)
+  + ~OfficeBlock()
+  + setIntern(Intern): void
+  + setSigner(Bureaucrat): void
+  + setExecutor(Bureaucrat): void
+  + doBureaucracy(string, string): void
+}
+
+class PresidentialPardonForm {
+  - _target: string
+  + PresidentialPardonForm(string)
+  + ~PresidentialPardonForm()
+  + execute(Bureaucrat): void
+  + getTarget(): string
+}
+class RobotomyRequestForm {
+  - _target: string
+  + RobotomyRequestForm(string)
+  + ~RobotomyRequestForm()
+  + execute(Bureaucrat): void
+  + getTarget(): string
+}
+class ShrubberyCreationForm {
+  - _target: string
+  + ShrubberyCreationForm(string)
+  + ~ShrubberyCreationForm()
+  + execute(Bureaucrat): void
+  + getTarget(): string
+}
+
+class Exception {
+  - _message: string
+  + GradeException(string);
+  + UnknownFormException(string);
+  + what(): char
+}
+
+Bureaucrat *-- "1" Form
+Intern *-- "1" Form
+OfficeBlock *-- "1" Intern
+OfficeBlock *-- "1" Bureaucrat
+Form <|-- ShrubberyCreationForm
+Form <|-- RobotomyRequestForm
+Form <|-- PresidentialPardonForm
+@enduml
