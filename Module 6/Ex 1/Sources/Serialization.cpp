@@ -1,8 +1,7 @@
 #include "Serialization.hpp"
-#include <cstdlib>
-#include <cstring>
-#include <ctime>
 #include <iostream>
+#include <cstring>
+#include <cstdlib>
 
 char randomChar() {
   const char alphanum[] =
@@ -10,25 +9,27 @@ char randomChar() {
   return alphanum[rand() % (sizeof(alphanum) - 1)];
 }
 
-void *serialize(void) {
-  char *raw = new char[20];
+std::unique_ptr<char[]> serialize()
+{
+  auto raw = std::make_unique<char[]>(20);
 
   for (int i = 0; i < 8; ++i) {
     raw[i] = randomChar();
   }
 
   int random = rand();
-  std::memcpy(raw + 8, &random, sizeof(int));
+  std::memcpy(raw.get() + 8, &random, sizeof(int));
 
   for (int i = 0; i < 8; ++i) {
     raw[12 + i] = randomChar();
   }
 
-  return static_cast<void *>(raw);
+  return std::unique_ptr<char[]>(raw.release());
 }
 
-Data *deserialize(void *raw) {
-  Data *data = new Data;
+std::unique_ptr<Data> deserialize(void *raw)
+{
+  auto data = std::make_unique<Data>();
 
   char *rawData = static_cast<char *>(raw);
 
