@@ -7,11 +7,12 @@
 #include <cstdlib>
 #include <ctime>
 #include <iostream>
+#include <memory>
 
 int main() {
   std::srand(std::time(0));
 
-  Base *base = generate();
+  std::unique_ptr<Base> base = generate();
 
   std::cout << "Identify from pointer: ";
   identify_from_pointer(base);
@@ -19,6 +20,5 @@ int main() {
   std::cout << "Identify from reference: ";
   identify_from_reference(*base);
 
-  delete base;
   return 0;
 }

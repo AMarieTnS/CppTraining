@@ -4,16 +4,18 @@
 #include "ClassC.hpp"
 #include <iostream>
 #include <string>
+#include <memory>
 
-Base *generate(void) {
+std::unique_ptr<Base> generate(void)
+{
   int randomInstanciates = rand() % 3;
   switch (randomInstanciates) {
   case 0:
-    return new ClassA();
+    return std::make_unique<ClassA>();
   case 1:
-    return new ClassB();
+    return std::make_unique<ClassB>();
   case 2:
-    return new ClassC();
+    return std::make_unique<ClassC>();
   default:
     return nullptr;
   }

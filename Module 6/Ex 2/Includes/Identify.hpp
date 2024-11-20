@@ -4,15 +4,22 @@
 #include "ClassC.hpp"
 #include <iostream>
 #include <string>
-
-void identify_from_pointer(Base *p) {
-  if (dynamic_cast<ClassA *>(p)) {
+#include <memory>
+void identify_from_pointer(std::unique_ptr<Base> &p)
+{
+  if (dynamic_cast<ClassA *>(p.get()))
+  {
     std::cout << "A" << std::endl;
-  } else if (dynamic_cast<ClassB *>(p)) {
+  }
+  else if (dynamic_cast<ClassB *>(p.get()))
+  {
     std::cout << "B" << std::endl;
-  } else if (dynamic_cast<ClassC *>(p)) {
+  }
+  else if (dynamic_cast<ClassC *>(p.get()))
+  {
     std::cout << "C" << std::endl;
-  } else
+  }
+  else
     std::cout << "ERROR POINTER" << std::endl;
 }
 
