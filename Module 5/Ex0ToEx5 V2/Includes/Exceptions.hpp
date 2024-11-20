@@ -4,10 +4,27 @@
 #include <exception>
 #include <string>
 
-class GradeException : public std::exception {
+class GradeTooHighException : public std::exception
+{
 public:
-  GradeException(const std::string &message);
-  const char *what() const noexcept override;
+  GradeTooHighException() : _message("Grade is too high!") {}
+  const char *what() const noexcept override
+  {
+    return _message.c_str();
+  }
+
+private:
+  std::string _message;
+};
+
+class GradeTooLowException : public std::exception
+{
+public:
+  GradeTooLowException() : _message("Grade is too low!") {}
+  const char *what() const noexcept override
+  {
+    return _message.c_str();
+  }
 
 private:
   std::string _message;
@@ -15,8 +32,11 @@ private:
 
 class UnknownFormException : public std::exception {
 public:
-  UnknownFormException(const std::string &message);
-  const char *what() const noexcept override;
+  UnknownFormException() : _message("Unknown form!") {}
+  const char *what() const noexcept override
+  {
+    return _message.c_str();
+  }
 
 private:
   std::string _message;

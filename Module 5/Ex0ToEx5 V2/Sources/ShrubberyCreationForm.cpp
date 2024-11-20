@@ -5,12 +5,15 @@
 ShrubberyCreationForm::ShrubberyCreationForm(const std::string &target)
     : Form("Shrubbery Creation", 145, 137), _target(target) {}
 
-void ShrubberyCreationForm::execute(const Bureaucrat &executor) const {
-  if (!isSigned()) {
-    throw GradeException("Grade too low");
+void ShrubberyCreationForm::execute(const Bureaucrat &executor) const
+{
+  if (!isSigned())
+  {
+    throw GradeTooLowException();
   }
-  if (executor.getGrade() > getGradeExecute()) {
-    throw GradeException("Grade too hight");
+  if (executor.getGrade() > getGradeExecute())
+  {
+    throw GradeTooHighException();
   }
   std::ofstream ofs(_target + "_shrubbery");
   if (ofs) {

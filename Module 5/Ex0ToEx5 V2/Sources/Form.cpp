@@ -5,14 +5,10 @@ Form::Form(const std::string &name, int gradeSign, int gradeExecute)
     : _name(name), _signed(false), _gradeSign(gradeSign),
       _gradeExecute(gradeExecute) {
   if (_gradeSign < 1 || _gradeExecute < 1) {
-    throw GradeException(
-        "Grade too high: " +
-        std::to_string(_gradeSign < 1 ? _gradeSign : _gradeExecute));
+    throw GradeTooHighException();
   }
   if (_gradeSign > 150 || _gradeExecute > 150) {
-    throw GradeException(
-        "Grade too low: " +
-        std::to_string(_gradeSign > 150 ? _gradeSign : _gradeExecute));
+    throw GradeTooLowException();
   }
 }
 
@@ -26,8 +22,7 @@ int Form::getGradeExecute() const noexcept { return _gradeExecute; }
 
 void Form::beSigned(const Bureaucrat &bureaucrat) {
   if (bureaucrat.getGrade() > _gradeSign) {
-    throw GradeException("Grade too low: " +
-                         std::to_string(bureaucrat.getGrade()));
+    throw GradeTooLowException();
   }
   _signed = true;
 }

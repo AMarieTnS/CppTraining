@@ -5,12 +5,14 @@
 RobotomyRequestForm::RobotomyRequestForm(const std::string &target)
     : Form("Robotomy Request", 72, 45), _target(target) {}
 
-void RobotomyRequestForm::execute(const Bureaucrat &executor) const {
+void RobotomyRequestForm::execute(const Bureaucrat &executor) const
+{
   if (!isSigned()) {
-    throw GradeException("Grade too low");
+    throw GradeTooLowException();
   }
-  if (executor.getGrade() > getGradeExecute()) {
-    throw GradeException("Grade too hight");
+  if (executor.getGrade() > getGradeExecute())
+  {
+    throw GradeTooHighException();
   }
   std::cout << "Drilling noises... ";
   if (rand() % 2) {

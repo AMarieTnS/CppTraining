@@ -87,32 +87,29 @@ int main() {
     std::cout << std::endl << "##Intern##" << std::endl;
 
     Intern someRandomIntern;
-    Form *rrf;
+    std::unique_ptr<Form> rrf;
     rrf = someRandomIntern.makeForm("robotomy request", "Bender");
     if (rrf) {
       Pedro.signForm(*rrf);
       Pedro.executeForm(*rrf);
-      delete rrf;
     }
 
     // Ex4
     std::cout << std::endl << "##OfficeBlock##" << std::endl;
-    Intern idiotOne;
-    Bureaucrat hermes = Bureaucrat("Hermes Conrad", 37);
-    Bureaucrat bob = Bureaucrat("Bobby Bobson", 123);
+    std::unique_ptr<Intern> idiotOne = std::make_unique<Intern>();
+    std::unique_ptr<Bureaucrat> hermes = std::make_unique<Bureaucrat>("Hermes Conrad", 37);
+    std::unique_ptr<Bureaucrat> bob = std::make_unique<Bureaucrat>("Bobby Bobson", 123);
     OfficeBlock ob;
-    ob.setIntern(idiotOne);
-    ob.setSigner(bob);
-    ob.setExecutor(hermes);
+    ob.setIntern(std::move(idiotOne));
+    ob.setSigner(std::move(bob));
+    ob.setExecutor(std::move(hermes));
     try {
       ob.doBureaucracy("mutant pig termination", "Pigley");
-    } catch (OfficeBlock::SpecificException &e) {
-      std::cerr << "Specific known error: " << e.what() << std::endl;
-
-    } catch (std::exception &e) {
-      std::cerr << "Unknown error: " << e.what() << std::endl;
     }
-
+    catch (std::exception &e)
+    {
+      std::cerr << "Specific known error: " << e.what() << std::endl;
+    }
   } catch (const std::exception &e) {
     std::cerr << "Exception caught in main: " << e.what() << std::endl;
   }

@@ -6,6 +6,7 @@
 
 class Bureaucrat;
 #include "Exceptions.hpp"
+#include "memory"
 
 class Form {
 public:

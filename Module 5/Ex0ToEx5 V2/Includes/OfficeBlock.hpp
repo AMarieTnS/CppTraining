@@ -3,29 +3,24 @@
 
 #include "Bureaucrat.hpp"
 #include "Intern.hpp"
+#include <memory>
 
 class OfficeBlock {
 public:
   OfficeBlock();
-  OfficeBlock(Intern &intern, Bureaucrat &signing, Bureaucrat &executing);
+  OfficeBlock(std::unique_ptr<Intern> intern, std::unique_ptr<Bureaucrat> signing, std::unique_ptr<Bureaucrat> executing);
   ~OfficeBlock() = default;
 
-  void setIntern(Intern &intern);
-  void setSigner(Bureaucrat &signing);
-  void setExecutor(Bureaucrat &executing);
+  void setIntern(std::unique_ptr<Intern> intern);
+  void setSigner(std::unique_ptr<Bureaucrat> signing);
+  void setExecutor(std::unique_ptr<Bureaucrat> executing);
 
-  void doBureaucracy(const std::string &formName,
-                     const std::string &target) const;
-
-  class SpecificException : public std::exception {
-  public:
-    const char *what() const noexcept override { return "Grade too high"; }
-  };
+  void doBureaucracy(const std::string &formName, const std::string &target) const;
 
 private:
-  Intern *_intern;
-  Bureaucrat *_signing;
-  Bureaucrat *_executing;
+  std::unique_ptr<Intern> _intern;
+  std::unique_ptr<Bureaucrat> _signing;
+  std::unique_ptr<Bureaucrat> _executing;
 };
 
 #endif
