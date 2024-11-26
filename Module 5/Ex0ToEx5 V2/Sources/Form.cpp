@@ -1,38 +1,49 @@
-#include "Form.hpp"
 #include "Bureaucrat.hpp"
+#include "Form.hpp"
 
-Form::Form(const std::string &name, int gradeSign, int gradeExecute)
+Form::Form(const std::string &name, int gradeSign, int gradeExecute, std::string target)
     : _name(name), _signed(false), _gradeSign(gradeSign),
-      _gradeExecute(gradeExecute) {
-  if (_gradeSign < 1 || _gradeExecute < 1) {
+      _gradeExecute(gradeExecute), _target(target)
+{
+  if (_gradeSign < 1 || _gradeExecute < 1)
+  {
     throw GradeTooHighException();
   }
-  if (_gradeSign > 150 || _gradeExecute > 150) {
+  if (_gradeSign > 150 || _gradeExecute > 150)
+  {
     throw GradeTooLowException();
   }
 }
 
-const std::string &Form::getName() const noexcept { return _name; }
+const std::string &Form::GetName() const noexcept { return _name; }
 
-bool Form::isSigned() const noexcept { return _signed; }
+bool Form::IsSigned() const noexcept { return _signed; }
 
-int Form::getGradeSign() const noexcept { return _gradeSign; }
+int Form::GetGradeSign() const noexcept { return _gradeSign; }
 
-int Form::getGradeExecute() const noexcept { return _gradeExecute; }
+int Form::GetGradeExecute() const noexcept { return _gradeExecute; }
 
-void Form::beSigned(const Bureaucrat &bureaucrat) {
-  if (bureaucrat.getGrade() > _gradeSign) {
+void Form::BeSigned(const Bureaucrat &bureaucrat)
+{
+  if (bureaucrat.GetGrade() > _gradeSign)
+  {
     throw GradeTooLowException();
   }
   _signed = true;
 }
 
-std::ostream &operator<<(std::ostream &os, const Form &form) {
-  os << "Form " << form.getName() << " (s.grade " << form.getGradeSign()
-     << ", ex.grade " << form.getGradeExecute() << ")";
-  if (form.isSigned()) {
+const std::string &Form::GetTarget() const noexcept { return _target; }
+
+std::ostream &operator<<(std::ostream &os, const Form &form)
+{
+  os << "Form " << form.GetName() << " (s.grade " << form.GetGradeSign()
+     << ", ex.grade " << form.GetGradeExecute() << ")";
+  if (form.IsSigned())
+  {
     os << " is signed.";
-  } else {
+  }
+  else
+  {
     os << " is not signed.";
   }
   return os;

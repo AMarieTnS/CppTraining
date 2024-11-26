@@ -30,7 +30,8 @@ private:
   std::string _message;
 };
 
-class UnknownFormException : public std::exception {
+class UnknownFormException : public std::exception
+{
 public:
   UnknownFormException() : _message("Unknown form!") {}
   const char *what() const noexcept override

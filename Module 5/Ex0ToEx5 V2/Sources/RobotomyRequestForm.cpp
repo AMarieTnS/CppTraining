@@ -3,23 +3,25 @@
 #include <iostream>
 
 RobotomyRequestForm::RobotomyRequestForm(const std::string &target)
-    : Form("Robotomy Request", 72, 45), _target(target) {}
+    : Form("Robotomy Request", 72, 45, target) {}
 
-void RobotomyRequestForm::execute(const Bureaucrat &executor) const
+void RobotomyRequestForm::Execute(const Bureaucrat &executor) const
 {
-  if (!isSigned()) {
+  if (!IsSigned())
+  {
     throw GradeTooLowException();
   }
-  if (executor.getGrade() > getGradeExecute())
+  if (executor.GetGrade() > GetGradeExecute())
   {
     throw GradeTooHighException();
   }
   std::cout << "Drilling noises... ";
-  if (rand() % 2) {
-    std::cout << _target << " has been robotomized successfully." << std::endl;
-  } else {
+  if (rand() % 2)
+  {
+    std::cout << Form::GetTarget() << " has been robotomized successfully." << std::endl;
+  }
+  else
+  {
     std::cout << "Robotomy failed." << std::endl;
   }
 }
-
-const std::string &RobotomyRequestForm::getTarget() const { return _target; }

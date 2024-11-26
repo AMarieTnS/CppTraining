@@ -1,25 +1,39 @@
 #ifndef INTERN_HPP
 #define INTERN_HPP
 
-#include "Exceptions.hpp"
-#include "Form.hpp"
-#include <iostream>
-#include <map>
+#include <memory>
 #include <string>
-#include "memory"
+#include "Form.hpp"
 
-class Intern {
+enum class FormType
+{
+  SHRUBBERY_CREATION,
+  ROBOTOMY_REQUEST,
+  PRESIDENTIAL_PARDON,
+  MUTANT_PIG_TERMINATION,
+  UNKNOWN_FORM
+};
+
+class Intern
+{
 public:
   Intern() = default;
-  ~Intern() = default;
+  Intern(const Intern &other) = delete;
+  Intern(Intern &&other) = delete;
+  Intern &operator=(const Intern &other) = delete;
+  Intern &operator=(Intern &&other) = delete;
+  virtual ~Intern() = default;
 
-  std::unique_ptr<Form> makeForm(const std::string &formName, const std::string &target);
+  std::unique_ptr<Form> MakeForm(FormType formType, const std::string &target);
+  std::unique_ptr<Form> MakeForm(const std::string &formName, const std::string &target);
 
 private:
-  typedef std::unique_ptr<Form> (Intern::*FormCreator)(const std::string &target) const;
   std::unique_ptr<Form> createShrubberyCreationForm(const std::string &target) const;
   std::unique_ptr<Form> createRobotomyRequestForm(const std::string &target) const;
   std::unique_ptr<Form> createPresidentialPardonForm(const std::string &target) const;
   std::unique_ptr<Form> createMutantPigTerminationForm(const std::string &target) const;
 };
+
+FormType stringToFormType(const std::string &formName);
+
 #endif

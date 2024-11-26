@@ -5,19 +5,27 @@
 #include <iostream>
 #include <stdexcept>
 #include <string>
+#include "Form.hpp"
 
 class Form;
 
-class Bureaucrat {
+class Bureaucrat
+{
 public:
   Bureaucrat(const std::string &name, int grade);
-  const std::string &getName() const;
-  int getGrade() const;
-  void incrementGrade();
-  void decrementGrade();
+  Bureaucrat(const Form &other) = delete;
+  virtual ~Bureaucrat() = default;
+  Bureaucrat(Form &&other) = delete;
+  Bureaucrat &operator=(const Form &other) = delete;
+  Bureaucrat &operator=(Form &&other) = delete;
 
-  void signForm(Form &form);
-  void executeForm(const Form &form) const;
+  const std::string &GetName() const;
+  int GetGrade() const;
+  void IncrementGrade();
+  void DecrementGrade();
+
+  void SignForm(Form &form);
+  void ExecuteForm(const Form &form) const;
 
 private:
   const std::string _name;

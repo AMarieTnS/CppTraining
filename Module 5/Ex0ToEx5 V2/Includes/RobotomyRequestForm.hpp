@@ -8,15 +8,16 @@
 #include <iostream>
 #include <string>
 
-class RobotomyRequestForm : public Form {
+class RobotomyRequestForm : public Form
+{
 public:
   RobotomyRequestForm(const std::string &target);
+  RobotomyRequestForm(const RobotomyRequestForm &other) = delete;
+  RobotomyRequestForm(RobotomyRequestForm &&other) = delete;
+  RobotomyRequestForm &operator=(const RobotomyRequestForm &other) = delete;
+  RobotomyRequestForm &operator=(RobotomyRequestForm &&other) = delete;
   virtual ~RobotomyRequestForm() = default;
-  void execute(const Bureaucrat &executor) const override;
-  const std::string &getTarget() const override;
-
-private:
-  std::string _target;
+  void Execute(const Bureaucrat &executor) const override;
 };
 
 #endif

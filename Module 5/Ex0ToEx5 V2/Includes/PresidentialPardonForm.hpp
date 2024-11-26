@@ -8,15 +8,16 @@
 #include <iostream>
 #include <string>
 
-class PresidentialPardonForm : public Form {
+class PresidentialPardonForm : public Form
+{
 public:
   PresidentialPardonForm(const std::string &target);
+  PresidentialPardonForm(const PresidentialPardonForm &other) = delete;
+  PresidentialPardonForm(PresidentialPardonForm &&other) = delete;
+  PresidentialPardonForm &operator=(const PresidentialPardonForm &other) = delete;
+  PresidentialPardonForm &operator=(PresidentialPardonForm &&other) = delete;
   virtual ~PresidentialPardonForm() = default;
-  void execute(const Bureaucrat &executor) const override;
-  const std::string &getTarget() const override;
-
-private:
-  std::string _target;
+  void Execute(const Bureaucrat &executor) const override;
 };
 
 #endif

@@ -3,25 +3,26 @@
 #include <iostream>
 
 ShrubberyCreationForm::ShrubberyCreationForm(const std::string &target)
-    : Form("Shrubbery Creation", 145, 137), _target(target) {}
+    : Form("Shrubbery Creation", 145, 137, target) {}
 
-void ShrubberyCreationForm::execute(const Bureaucrat &executor) const
+void ShrubberyCreationForm::Execute(const Bureaucrat &executor) const
 {
-  if (!isSigned())
+  if (!IsSigned())
   {
     throw GradeTooLowException();
   }
-  if (executor.getGrade() > getGradeExecute())
+  if (executor.GetGrade() > GetGradeExecute())
   {
     throw GradeTooHighException();
   }
-  std::ofstream ofs(_target + "_shrubbery");
-  if (ofs) {
+  std::ofstream ofs(Form::GetTarget() + "_shrubbery");
+  if (ofs)
+  {
     ofs << "ASCII trees" << std::endl;
     ofs.close();
-  } else {
+  }
+  else
+  {
     std::cerr << "Error creating file." << std::endl;
   }
 }
-
-const std::string &ShrubberyCreationForm::getTarget() const { return _target; }

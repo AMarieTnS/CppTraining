@@ -1,15 +1,15 @@
 #include "Bureaucrat.hpp"
-#include "Form.hpp"
 #include "Exceptions.hpp"
 
 Bureaucrat::Bureaucrat(const std::string &name, int grade)
     : _name(name), _grade(grade) {}
 
-const std::string &Bureaucrat::getName() const { return _name; }
+const std::string &Bureaucrat::GetName() const { return _name; }
 
-int Bureaucrat::getGrade() const { return _grade; }
+int Bureaucrat::GetGrade() const { return _grade; }
 
-void Bureaucrat::incrementGrade() {
+void Bureaucrat::IncrementGrade()
+{
   if (_grade <= 1)
   {
     throw GradeTooHighException();
@@ -17,7 +17,8 @@ void Bureaucrat::incrementGrade() {
   _grade--;
 }
 
-void Bureaucrat::decrementGrade() {
+void Bureaucrat::DecrementGrade()
+{
   if (_grade >= 150)
   {
     throw GradeTooLowException();
@@ -25,38 +26,38 @@ void Bureaucrat::decrementGrade() {
   _grade++;
 }
 
-void Bureaucrat::signForm(Form &form)
+void Bureaucrat::SignForm(Form &form)
 {
   try
   {
-    form.beSigned(*this);
+    form.BeSigned(*this);
     std::cout << "Bureaucrat " << _name << " (Grade " << _grade << ") signs a "
-              << form.getName() << " Form (s.grade " << form.getGradeSign()
-              << ", ex.grade " << form.getGradeExecute() << ") targeted on "
-              << form.getTarget() << " (Unsigned)" << std::endl;
+              << form.GetName() << " Form (s.grade " << form.GetGradeSign()
+              << ", ex.grade " << form.GetGradeExecute() << ") targeted on "
+              << form.GetTarget() << " (Unsigned)" << std::endl;
   }
   catch (const std::exception &e)
   {
-    std::cout << _name << " cannot sign " << form.getName() << " because "
+    std::cout << _name << " cannot sign " << form.GetName() << " because "
               << e.what() << std::endl;
   }
 }
 
-void Bureaucrat::executeForm(const Form &form) const
+void Bureaucrat::ExecuteForm(const Form &form) const
 {
   try
   {
-    form.execute(*this);
+    form.Execute(*this);
   }
   catch (const std::exception &e)
   {
-    std::cout << _name << " cannot execute " << form.getName() << " because "
+    std::cout << _name << " cannot execute " << form.GetName() << " because "
               << e.what() << std::endl;
   }
 }
 
 std::ostream &operator<<(std::ostream &os, const Bureaucrat &bureaucrat)
 {
-  os << bureaucrat.getName() << ", bureaucrat grade " << bureaucrat.getGrade();
+  os << bureaucrat.GetName() << ", bureaucrat grade " << bureaucrat.GetGrade();
   return os;
 }

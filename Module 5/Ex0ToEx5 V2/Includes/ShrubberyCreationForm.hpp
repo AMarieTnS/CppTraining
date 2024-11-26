@@ -8,15 +8,16 @@
 #include <iostream>
 #include <string>
 
-class ShrubberyCreationForm : public Form {
+class ShrubberyCreationForm : public Form
+{
 public:
   ShrubberyCreationForm(const std::string &target);
+  ShrubberyCreationForm(const ShrubberyCreationForm &other) = delete;
+  ShrubberyCreationForm(ShrubberyCreationForm &&other) = delete;
+  ShrubberyCreationForm &operator=(const ShrubberyCreationForm &other) = delete;
+  ShrubberyCreationForm &operator=(ShrubberyCreationForm &&other) = delete;
   virtual ~ShrubberyCreationForm() = default;
-  void execute(const Bureaucrat &executor) const override;
-  const std::string &getTarget() const override;
-
-private:
-  std::string _target;
+  void Execute(const Bureaucrat &executor) const override;
 };
 
 #endif

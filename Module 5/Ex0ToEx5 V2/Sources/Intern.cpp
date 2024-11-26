@@ -2,27 +2,52 @@
 #include "PresidentialPardonForm.hpp"
 #include "RobotomyRequestForm.hpp"
 #include "ShrubberyCreationForm.hpp"
-#include "memory"
+#include "MutantPigTerminationForm.hpp"
+#include <memory>
+#include <map>
+#include <iostream>
 
-std::unique_ptr<Form> Intern::makeForm(const std::string &formName, const std::string &target)
+FormType stringToFormType(const std::string &formName)
 {
-  std::map<std::string, FormCreator> formCreators = {
-      {"shrubbery creation", &Intern::createShrubberyCreationForm},
-      {"robotomy request", &Intern::createRobotomyRequestForm},
-      {"presidential pardon", &Intern::createPresidentialPardonForm},
-      {"mutant pig termination", &Intern::createMutantPigTerminationForm}};
+  if (formName == "shrubbery creation")
+    return FormType::SHRUBBERY_CREATION;
+  if (formName == "robotomy request")
+    return FormType::ROBOTOMY_REQUEST;
+  if (formName == "presidential pardon")
+    return FormType::PRESIDENTIAL_PARDON;
+  if (formName == "mutant pig termination")
+    return FormType::MUTANT_PIG_TERMINATION;
+  return FormType::UNKNOWN_FORM;
+}
 
-  auto it = formCreators.find(formName);
-  if (it != formCreators.end()) {
-    std::unique_ptr<Form> form = (this->*(it->second))(target);
-    std::cout << "Intern creates a " << form->getName() << " Form (s.grade "
-              << form->getGradeSign() << ", ex.grade "
-              << form->getGradeExecute() << ") targeted on " << target
-              << " (Unsigned)" << std::endl;
-    return form;
-  } else {
-    throw UnknownFormException();
+std::unique_ptr<Form> Intern::MakeForm(FormType formType, const std::string &target)
+{
+  std::unique_ptr<Form> form;
+  switch (formType)
+  {
+  case FormType::SHRUBBERY_CREATION:
+    form = createShrubberyCreationForm(target);
+    break;
+  case FormType::ROBOTOMY_REQUEST:
+    form = createRobotomyRequestForm(target);
+    break;
+  case FormType::PRESIDENTIAL_PARDON:
+    form = createPresidentialPardonForm(target);
+    break;
+  case FormType::MUTANT_PIG_TERMINATION:
+    form = createMutantPigTerminationForm(target);
+    break;
+  default:
+    throw std::runtime_error("Unknown form type");
   }
+  std::cout << "Intern creates a " << form->GetName() << " Form (s.grade " << form->GetGradeSign() << ", ex.grade " << form->GetGradeExecute() << ") targeted on " << target << " (Unsigned)" << std::endl;
+  return form;
+}
+
+std::unique_ptr<Form> Intern::MakeForm(const std::string &formName, const std::string &target)
+{
+  FormType formType = stringToFormType(formName);
+  return MakeForm(formType, target);
 }
 
 std::unique_ptr<Form> Intern::createShrubberyCreationForm(const std::string &target) const
@@ -42,29 +67,5 @@ std::unique_ptr<Form> Intern::createPresidentialPardonForm(const std::string &ta
 
 std::unique_ptr<Form> Intern::createMutantPigTerminationForm(const std::string &target) const
 {
-  class MutantPigTerminationForm : public Form {
-  public:
-    MutantPigTerminationForm(const std::string &target)
-        : Form("Mutant Pig Termination", 130, 50), _target(target) {}
-    void execute(const Bureaucrat &executor) const override {
-      if (!isSigned()) {
-        throw GradeTooLowException();
-      }
-      if (executor.getGrade() > getGradeExecute()) {
-        throw GradeTooHighException();
-      }
-      std::cout << "Bureaucrat " << executor.getName() << " (Grade "
-                << executor.getGrade() << ") executes a " << getName()
-                << " Form (s.grade " << getGradeSign() << ", ex.grade "
-                << getGradeExecute() << ") targeted on " << _target
-                << " (Signed)" << std::endl;
-      std::cout << "That'll do, " << _target << ". That'll do..." << std::endl;
-    }
-    const std::string &getTarget() const override { return _target; }
-
-  private:
-    std::string _target;
-  };
-
   return std::make_unique<MutantPigTerminationForm>(target);
 }
