@@ -1,12 +1,18 @@
 #include <iostream>
 
-template <typename T> void iter(T *array, size_t length, void (*func)(T &)) {
+template <typename T>
+using FuncPtr = void (*)(T &);
+
+template <typename T>
+void iter(T *array, size_t length, FuncPtr<T> func)
+{
   for (size_t i = 0; i < length; ++i) {
     func(array[i]);
   }
 }
 
-template <typename T> void print(T &element) { std::cout << element << " "; }
+template <typename T>
+void print(T &element) { std::cout << element << " "; }
 
 int main() {
   int intArray[] = {1, 2, 3, 4, 5};

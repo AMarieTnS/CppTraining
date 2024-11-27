@@ -15,25 +15,11 @@ private:
 public:
   Array() : _data(nullptr), _size(0) {}
 
-  Array(unsigned int n) : _data(std::make_unique<T[]>(n)), _size(n)
-  {
-    for (unsigned int i = 0; i < _size; ++i)
-    {
-      _data[i] = T();
-    }
-  }
+  Array(unsigned int n) : _data(std::make_unique<T[]>(n)), _size(n) {}
 
-  ~Array()
-  {
-  }
+  ~Array() = default;
 
-  Array(const Array &other) : _data(std::make_unique<T[]>(other._size)), _size(other._size)
-  {
-    for (unsigned int i = 0; i < _size; ++i)
-    {
-      _data[i] = other._data[i];
-    }
-  }
+  Array(const Array &other) : _data(std::make_unique<T[]>(other._size)), _size(other._size) {}
 
   Array &operator=(const Array &other)
   {
@@ -41,10 +27,6 @@ public:
     {
       _data = std::make_unique<T[]>(other._size);
       _size = other._size;
-      for (unsigned int i = 0; i < _size; ++i)
-      {
-        _data[i] = other._data[i];
-      }
     }
     return *this;
   }
