@@ -2,9 +2,11 @@
 #define SERIALIZATION_HPP
 
 #include "Data.hpp"
+#include <vector>
+#include <string_view>
 #include <memory>
 
-std::unique_ptr<char[]> serialize();
-std::unique_ptr<Data> deserialize(void *raw);
+std::vector<char> serialize();
+std::unique_ptr<Data> deserialize(std::string_view buffer);
 
 #endif

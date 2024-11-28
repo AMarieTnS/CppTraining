@@ -1,12 +1,10 @@
 #ifndef CLASSB_HPP
 #define CLASSB_HPP
 
-#include "Base.hpp"
-#include <iostream>
-#include <string>
+#include "base.hpp"
 
-class ClassB : public Base {
-public:
-private:
+class ClassB : public Base
+{
 };
+
 #endif

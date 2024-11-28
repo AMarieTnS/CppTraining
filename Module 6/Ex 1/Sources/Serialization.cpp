@@ -1,7 +1,10 @@
-#include "Serialization.hpp"
-#include <iostream>
+#include "Data.hpp"
+#include <vector>
 #include <cstring>
+#include <iostream>
 #include <cstdlib>
+#include <ctime>
+#include <memory>
 
 char randomChar() {
   const char alphanum[] =
@@ -9,33 +12,32 @@ char randomChar() {
   return alphanum[rand() % (sizeof(alphanum) - 1)];
 }
 
-std::unique_ptr<char[]> serialize()
+std::vector<char> serialize()
 {
-  auto raw = std::make_unique<char[]>(20);
+  std::vector<char> raw(20);
 
-  for (int i = 0; i < 8; ++i) {
+  for (int i = 0; i < 8; ++i)
+  {
     raw[i] = randomChar();
   }
 
-  int random = rand();
-  std::memcpy(raw.get() + 8, &random, sizeof(int));
+  int n = rand();
+  std::memcpy(raw.data() + 8, &n, sizeof(int));
 
-  for (int i = 0; i < 8; ++i) {
+  for (int i = 0; i < 8; ++i)
+  {
     raw[12 + i] = randomChar();
   }
 
-  return std::unique_ptr<char[]>(raw.release());
+  return raw;
 }
 
-std::unique_ptr<Data> deserialize(void *raw)
+std::unique_ptr<Data> deserialize(std::string_view buffer)
 {
   auto data = std::make_unique<Data>();
-
-  char *rawData = static_cast<char *>(raw);
-
-  data->s1 = std::string(rawData, 8);
-  std::memcpy(&data->n, rawData + 8, sizeof(int));
-  data->s2 = std::string(rawData + 12, 8);
+  data->s1 = std::string(buffer.data(), 8);
+  data->n = *reinterpret_cast<const int *>(buffer.data() + 8);
+  data->s2 = std::string(buffer.data() + 12, 8);
 
   return data;
 }
