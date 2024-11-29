@@ -7,7 +7,7 @@
 #include <memory>
 #include <variant>
 
-using VariantBase = std::variant<ClassA, ClassB, ClassC>;
+using VariantBase = std::variant<std::monostate, ClassA, ClassB, ClassC>;
 
 std::unique_ptr<VariantBase> generate();
 
