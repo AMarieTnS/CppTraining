@@ -7,14 +7,7 @@ RobotomyRequestForm::RobotomyRequestForm(const std::string &target)
 
 void RobotomyRequestForm::Execute(const Bureaucrat &executor) const
 {
-  if (!IsSigned())
-  {
-    throw GradeTooLowException();
-  }
-  if (executor.GetGrade() > GetGradeExecute())
-  {
-    throw GradeTooHighException();
-  }
+  CheckExecution(executor);
   std::cout << "Drilling noises... ";
   if (rand() % 2)
   {

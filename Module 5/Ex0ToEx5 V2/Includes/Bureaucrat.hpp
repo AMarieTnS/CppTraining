@@ -12,20 +12,23 @@ class Form;
 class Bureaucrat
 {
 public:
+  /* Constructors */
   Bureaucrat(const std::string &name, int grade);
   Bureaucrat(const Form &other) = delete;
-  virtual ~Bureaucrat() = default;
+  ~Bureaucrat() = default;
   Bureaucrat(Form &&other) = delete;
   Bureaucrat &operator=(const Form &other) = delete;
   Bureaucrat &operator=(Form &&other) = delete;
 
-  const std::string &GetName() const;
-  int GetGrade() const;
+  /* Execution Functions */
   void IncrementGrade();
   void DecrementGrade();
-
   void SignForm(Form &form);
   void ExecuteForm(const Form &form) const;
+
+  /* Getters */
+  const std::string &GetName() const;
+  int GetGrade() const;
 
 private:
   const std::string _name;

@@ -11,12 +11,15 @@
 class PresidentialPardonForm : public Form
 {
 public:
+  /* Constructors */
   PresidentialPardonForm(const std::string &target);
   PresidentialPardonForm(const PresidentialPardonForm &other) = delete;
   PresidentialPardonForm(PresidentialPardonForm &&other) = delete;
   PresidentialPardonForm &operator=(const PresidentialPardonForm &other) = delete;
   PresidentialPardonForm &operator=(PresidentialPardonForm &&other) = delete;
-  virtual ~PresidentialPardonForm() = default;
+  ~PresidentialPardonForm() = default;
+
+  /* Execution Functions */
   void Execute(const Bureaucrat &executor) const override;
 };
 

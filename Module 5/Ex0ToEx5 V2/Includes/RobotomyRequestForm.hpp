@@ -11,12 +11,15 @@
 class RobotomyRequestForm : public Form
 {
 public:
+  /* Constructors */
   RobotomyRequestForm(const std::string &target);
   RobotomyRequestForm(const RobotomyRequestForm &other) = delete;
   RobotomyRequestForm(RobotomyRequestForm &&other) = delete;
   RobotomyRequestForm &operator=(const RobotomyRequestForm &other) = delete;
   RobotomyRequestForm &operator=(RobotomyRequestForm &&other) = delete;
-  virtual ~RobotomyRequestForm() = default;
+  ~RobotomyRequestForm() = default;
+
+  /* Execution Functions */
   void Execute(const Bureaucrat &executor) const override;
 };
 

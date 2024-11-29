@@ -5,8 +5,10 @@
 #include "Bureaucrat.hpp"
 #include <memory>
 
-class OfficeBlock {
+class OfficeBlock
+{
 public:
+  /* Constructors */
   OfficeBlock();
   OfficeBlock(std::unique_ptr<Intern> intern, std::unique_ptr<Bureaucrat> signing, std::unique_ptr<Bureaucrat> executing);
   OfficeBlock(const OfficeBlock &other) = delete;
@@ -14,16 +16,28 @@ public:
   OfficeBlock &operator=(const OfficeBlock &other) = delete;
   OfficeBlock &operator=(OfficeBlock &&other) = delete;
   ~OfficeBlock() = default;
+
+  /* Execution Functions */
+  void DoBureaucracy(const std::string &formName, const std::string &target);
+
+  /* Setters */
   void SetIntern(std::unique_ptr<Intern> intern);
   void SetSigner(std::unique_ptr<Bureaucrat> signing);
   void SetExecutor(std::unique_ptr<Bureaucrat> executing);
 
-  void DoBureaucracy(FormType formType, const std::string &target) const;
-
 private:
+  std::unique_ptr<Form> CreateGenericForm(const std::string &formName, const std::string &target);
   std::unique_ptr<Intern> _intern;
   std::unique_ptr<Bureaucrat> _signing;
   std::unique_ptr<Bureaucrat> _executing;
+
+  struct FormCreationEntry
+  {
+    const char *formName;
+    std::unique_ptr<Form> (OfficeBlock::*createForm)(const std::string &, const std::string &);
+  };
+
+  static const FormCreationEntry formCreationArray[];
 };
 
 #endif

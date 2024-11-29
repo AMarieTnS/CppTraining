@@ -43,4 +43,30 @@ private:
   std::string _message;
 };
 
+class InvalidFormException : public std::exception
+{
+public:
+  InvalidFormException() : _message("Invalid form!") {}
+  const char *what() const noexcept override
+  {
+    return _message.c_str();
+  }
+
+private:
+  std::string _message;
+};
+
+class NotSignedException : public std::exception
+{
+public:
+  NotSignedException() : _message("Not signed!") {}
+  const char *what() const noexcept override
+  {
+    return _message.c_str();
+  }
+
+private:
+  std::string _message;
+};
+
 #endif

@@ -11,12 +11,15 @@
 class ShrubberyCreationForm : public Form
 {
 public:
+  /* Constructors */
   ShrubberyCreationForm(const std::string &target);
   ShrubberyCreationForm(const ShrubberyCreationForm &other) = delete;
   ShrubberyCreationForm(ShrubberyCreationForm &&other) = delete;
   ShrubberyCreationForm &operator=(const ShrubberyCreationForm &other) = delete;
   ShrubberyCreationForm &operator=(ShrubberyCreationForm &&other) = delete;
-  virtual ~ShrubberyCreationForm() = default;
+  ~ShrubberyCreationForm() = default;
+
+  /* Execution Functions */
   void Execute(const Bureaucrat &executor) const override;
 };
 

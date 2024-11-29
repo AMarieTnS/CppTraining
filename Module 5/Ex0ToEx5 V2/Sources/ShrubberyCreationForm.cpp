@@ -7,14 +7,7 @@ ShrubberyCreationForm::ShrubberyCreationForm(const std::string &target)
 
 void ShrubberyCreationForm::Execute(const Bureaucrat &executor) const
 {
-  if (!IsSigned())
-  {
-    throw GradeTooLowException();
-  }
-  if (executor.GetGrade() > GetGradeExecute())
-  {
-    throw GradeTooHighException();
-  }
+  CheckExecution(executor);
   std::ofstream ofs(Form::GetTarget() + "_shrubbery");
   if (ofs)
   {

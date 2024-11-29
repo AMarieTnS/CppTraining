@@ -2,10 +2,6 @@
 #include "Form.hpp"
 #include "Intern.hpp"
 #include "OfficeBlock.hpp"
-#include "PresidentialPardonForm.hpp"
-#include "RobotomyRequestForm.hpp"
-#include "ShrubberyCreationForm.hpp"
-#include "MutantPigTerminationForm.hpp"
 
 int main() {
   try
@@ -19,7 +15,7 @@ int main() {
     ob.SetExecutor(std::make_unique<Bureaucrat>(hermes));
     try
     {
-      ob.DoBureaucracy(FormType::MUTANT_PIG_TERMINATION, "Pigley");
+      ob.DoBureaucracy("mutant pig termination", "Pigley");
     }
     catch (const std::exception &e)
     {

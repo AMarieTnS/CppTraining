@@ -34,6 +34,18 @@ void Form::BeSigned(const Bureaucrat &bureaucrat)
 
 const std::string &Form::GetTarget() const noexcept { return _target; }
 
+void Form::CheckExecution(const Bureaucrat &executor) const
+{
+  if (!IsSigned())
+  {
+    throw NotSignedException();
+  }
+  if (executor.GetGrade() > GetGradeExecute())
+  {
+    throw GradeTooHighException();
+  }
+}
+
 std::ostream &operator<<(std::ostream &os, const Form &form)
 {
   os << "Form " << form.GetName() << " (s.grade " << form.GetGradeSign()

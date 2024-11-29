@@ -4,19 +4,12 @@
 #include <memory>
 #include <string>
 #include "Form.hpp"
-
-enum class FormType
-{
-  SHRUBBERY_CREATION,
-  ROBOTOMY_REQUEST,
-  PRESIDENTIAL_PARDON,
-  MUTANT_PIG_TERMINATION,
-  UNKNOWN_FORM
-};
+#include <functional>
 
 class Intern
 {
 public:
+  /* Constructors */
   Intern() = default;
   Intern(const Intern &other) = delete;
   Intern(Intern &&other) = delete;
@@ -24,16 +17,21 @@ public:
   Intern &operator=(Intern &&other) = delete;
   virtual ~Intern() = default;
 
-  std::unique_ptr<Form> MakeForm(FormType formType, const std::string &target);
+  /* Execution Functions */
   std::unique_ptr<Form> MakeForm(const std::string &formName, const std::string &target);
 
 private:
-  std::unique_ptr<Form> createShrubberyCreationForm(const std::string &target) const;
-  std::unique_ptr<Form> createRobotomyRequestForm(const std::string &target) const;
-  std::unique_ptr<Form> createPresidentialPardonForm(const std::string &target) const;
-  std::unique_ptr<Form> createMutantPigTerminationForm(const std::string &target) const;
-};
+  std::unique_ptr<Form> CreateShrubberyForm(const std::string &target);
+  std::unique_ptr<Form> CreateRobotomyForm(const std::string &target);
+  std::unique_ptr<Form> CreatePardonForm(const std::string &target);
 
-FormType stringToFormType(const std::string &formName);
+  struct FormCreationEntry
+  {
+    const char *formName;
+    std::unique_ptr<Form> (Intern::*createForm)(const std::string &);
+  };
+
+  static const FormCreationEntry formCreationArray[];
+};
 
 #endif
