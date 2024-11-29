@@ -12,3 +12,7 @@
 
 # Ignorer les fichiers temporaires
 *.tmp
+
+# Ignorer les dossiers build
+**/build/
+**/Doxygen/
