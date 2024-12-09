@@ -3,14 +3,14 @@
 
 #include <memory>
 #include <string>
+#include <map>
 #include "Form.hpp"
-#include <functional>
 
 class Intern
 {
 public:
   /* Constructors */
-  Intern() = default;
+  Intern();
   Intern(const Intern &other) = delete;
   Intern(Intern &&other) = delete;
   Intern &operator=(const Intern &other) = delete;
@@ -25,13 +25,9 @@ private:
   std::unique_ptr<Form> CreateRobotomyForm(const std::string &target);
   std::unique_ptr<Form> CreatePardonForm(const std::string &target);
 
-  struct FormCreationEntry
-  {
-    const char *formName;
-    std::unique_ptr<Form> (Intern::*createForm)(const std::string &);
-  };
+  void InitializeFormCreationMap();
 
-  static const FormCreationEntry formCreationArray[];
+  std::map<std::string, std::unique_ptr<Form> (Intern::*)(const std::string &)> _formCreationMap;
 };
 
 #endif

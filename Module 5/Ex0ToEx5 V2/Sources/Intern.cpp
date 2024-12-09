@@ -2,24 +2,26 @@
 #include "PresidentialPardonForm.hpp"
 #include "RobotomyRequestForm.hpp"
 #include "ShrubberyCreationForm.hpp"
-#include <memory>
-#include <map>
 #include <iostream>
 
-const Intern::FormCreationEntry Intern::formCreationArray[] = {
-    {"shrubbery creation", &Intern::CreateShrubberyForm},
-    {"robotomy request", &Intern::CreateRobotomyForm},
-    {"presidential pardon", &Intern::CreatePardonForm},
-    {nullptr, nullptr}};
+Intern::Intern()
+{
+  InitializeFormCreationMap();
+}
+
+void Intern::InitializeFormCreationMap()
+{
+  _formCreationMap["shrubbery creation"] = &Intern::CreateShrubberyForm;
+  _formCreationMap["robotomy request"] = &Intern::CreateRobotomyForm;
+  _formCreationMap["presidential pardon"] = &Intern::CreatePardonForm;
+}
 
 std::unique_ptr<Form> Intern::MakeForm(const std::string &formName, const std::string &target)
 {
-  for (int i = 0; formCreationArray[i].formName != nullptr; ++i)
+  auto it = _formCreationMap.find(formName);
+  if (it != _formCreationMap.end())
   {
-    if (formName == formCreationArray[i].formName)
-    {
-      return (this->*formCreationArray[i].createForm)(target);
-    }
+    return (this->*(it->second))(target);
   }
   throw UnknownFormException();
 }

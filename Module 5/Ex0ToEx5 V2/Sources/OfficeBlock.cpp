@@ -1,15 +1,17 @@
 #include "OfficeBlock.hpp"
+#include "GenericForm.hpp"
 #include <iostream>
-#include <GenericForm.hpp>
 
-const OfficeBlock::FormCreationEntry OfficeBlock::formCreationArray[] = {
-    {"mutant pig termination", &OfficeBlock::CreateGenericForm},
-    {nullptr, nullptr}};
-
-OfficeBlock::OfficeBlock() : _intern(nullptr), _signing(nullptr), _executing(nullptr) {}
+OfficeBlock::OfficeBlock()
+{
+    InitializeFormCreationMap();
+}
 
 OfficeBlock::OfficeBlock(std::unique_ptr<Intern> intern, std::unique_ptr<Bureaucrat> signing, std::unique_ptr<Bureaucrat> executing)
-    : _intern(std::move(intern)), _signing(std::move(signing)), _executing(std::move(executing)) {}
+    : _intern(std::move(intern)), _signing(std::move(signing)), _executing(std::move(executing))
+{
+    InitializeFormCreationMap();
+}
 
 void OfficeBlock::SetIntern(std::unique_ptr<Intern> intern)
 {
@@ -24,6 +26,11 @@ void OfficeBlock::SetSigner(std::unique_ptr<Bureaucrat> signing)
 void OfficeBlock::SetExecutor(std::unique_ptr<Bureaucrat> executing)
 {
     _executing = std::move(executing);
+}
+
+void OfficeBlock::InitializeFormCreationMap()
+{
+    _formCreationMap["mutant pig termination"] = &OfficeBlock::CreateGenericForm;
 }
 
 std::unique_ptr<Form> OfficeBlock::CreateGenericForm(const std::string &formName, const std::string &target)
@@ -43,16 +50,12 @@ void OfficeBlock::DoBureaucracy(const std::string &formName, const std::string &
     }
 
     std::unique_ptr<Form> form;
-    for (int i = 0; formCreationArray[i].formName != nullptr; ++i)
+    auto it = _formCreationMap.find(formName);
+    if (it != _formCreationMap.end())
     {
-        if (formName == formCreationArray[i].formName)
-        {
-            form = (this->*formCreationArray[i].createForm)(formName, target);
-            break;
-        }
+        form = (this->*(it->second))(formName, target);
     }
-
-    if (!form)
+    else
     {
         form = _intern->MakeForm(formName, target);
     }

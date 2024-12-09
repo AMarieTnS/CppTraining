@@ -4,6 +4,7 @@
 #include "Intern.hpp"
 #include "Bureaucrat.hpp"
 #include <memory>
+#include <map>
 
 class OfficeBlock
 {
@@ -31,13 +32,9 @@ private:
   std::unique_ptr<Bureaucrat> _signing;
   std::unique_ptr<Bureaucrat> _executing;
 
-  struct FormCreationEntry
-  {
-    const char *formName;
-    std::unique_ptr<Form> (OfficeBlock::*createForm)(const std::string &, const std::string &);
-  };
+  void InitializeFormCreationMap();
 
-  static const FormCreationEntry formCreationArray[];
+  std::map<std::string, std::unique_ptr<Form> (OfficeBlock::*)(const std::string &, const std::string &)> _formCreationMap;
 };
 
 #endif
