@@ -21,7 +21,7 @@ public:
     /* Execution Functions */
     /**
      * @brief Processes a request received from the client.
-     * @param request The request to process.
+     * @param[in] request  The request to process.
      * @return The response after processing.
      */
     std::string ProcessRequest(const std::string &request);

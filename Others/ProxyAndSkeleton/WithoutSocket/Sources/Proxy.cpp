@@ -2,8 +2,9 @@
 
 /**
  * @brief Sends an asynchronous request.
- * @param request The request to send.
+ * @param[in] request The request to send.
  * @return A std::future containing the response.
+ * @throws std::future_error If the promise state is invalid.
  */
 std::future<std::string> Proxy::AsyncRequest(const std::string &request)
 {
@@ -13,7 +14,8 @@ std::future<std::string> Proxy::AsyncRequest(const std::string &request)
 
 /**
  * @brief Sets the response to the asynchronous request.
- * @param response The response to set.
+ * @param[in] response The response to set.
+ * @throws std::future_error If the promise state is invalid.
  */
 void Proxy::SetResponse(const std::string &response)
 {
